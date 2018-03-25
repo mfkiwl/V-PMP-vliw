@@ -1,2 +1,2 @@
-# What is V-PMP?
-V-PMP stands for *Very Long Instrucion Word* - *Packet Manipulator Processor*. It's a soft core able to execute 8 instructions in parallel per clock cycle. It has been designed to specifically meet the need of packet manipulation tasks.
+## What is V-PMP?
+V-PMP stands for *Very Long Instrucion Word* - *Packet Manipulator Processor*. It's a soft core able to execute 8 MIPS-like instructions in parallel per clock cycle. It has been designed to specifically meet the need of packet manipulation tasks. We exploit the *Instruction Level Parallelization* by means of a wider instruction that is divided into 8 *syllables* that are executed in dedicated lanes.
