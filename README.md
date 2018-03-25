@@ -1,3 +1,1 @@
-Packet Manipulator Processor
-
-VLIW 8 issue
+#Very Long Instruction Word Packet Manipulator Processor
