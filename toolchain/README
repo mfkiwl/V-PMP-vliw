@@ -1,0 +1,13 @@
+------------INSTRUCTION LAYOUT------------
+
+Load Instructions: ldX $a, $b, imm 
+
+$a = register where to store data loaded, 
+$b = register containing the offset address
+imm = offset immediate 
+
+-------------------------------------------
+
+Store Instructions: stX $a, $b, imm 
+
+
