@@ -2,3 +2,4 @@ theme: jekyll-theme-slate
 title: V-PMP
 description: A Very Long Instruction Word Packet Manipulator Processor
 show_downloads: "true"
+google_analytics: UA-117405304-1
