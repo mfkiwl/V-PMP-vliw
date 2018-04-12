@@ -5,5 +5,7 @@ V-PMP stands for *Very Long Instrucion Word* - *Packet Manipulator Processor*. I
 <img src="https://raw.githubusercontent.com/marcux95/V-PMP/master/docs/figs/top.png" width="800"/>
  </p>
 
+## Getting started with V-PMP
+You can find tutorials, implementation details and how to correctly set up your environment to experiment with V-PMP in the [repo wiki](https://github.com/marcux95/V-PMP/wiki).
 
 
