@@ -1,0 +1,102 @@
+ALU | 0x04             | add32 dst, imm        | dst += imm                       
+CTR | 0x05             | ja +off               | PC += off                          
+ALU | 0x07             | add dst, imm          | dst += imm                       
+ALU | 0x0c             | add32 dst, src        | dst += src                       
+ALU | 0x0f             | add dst, src          | dst += src                       
+ALU | 0x14             | sub32 dst, imm        | dst -= imm                       
+CTR | 0x15             | jeq dst, imm, +off    | PC += off if dst == imm          
+ALU | 0x17             | sub dst, imm          | dst -= imm                       
+ALU | 0x18             | lddw dst, imm         | dst = imm                         
+ALU | 0x1c             | sub32 dst, src        | dst -= src
+CTR | 0x1d             | jeq dst, src, +off    | PC += off if dst == src          
+ALU | 0x1f             | sub dst, src          | dst -= src
+MEM | 0x20             | ldabsw src, dst, imm  | See kernel documentation
+ALU | 0x24             | mul32 dst, imm        | dst *= imm
+CTR | 0x25             | jgt dst, imm, +off    | PC += off if dst > imm
+ALU | 0x27             | mul dst, imm          | dst *= imm
+MEM | 0x28             | ldabsh src, dst, imm  | ...
+ALU | 0x2c             | mul32 dst, src        | dst *= src
+CTR | 0x2d             | jgt dst, src, +off    | PC += off if dst > src
+ALU | 0x2f             | mul dst, src          | dst *= src
+MEM | 0x30             | ldabsb src, dst, imm  | ...
+ALU | 0x34             | div32 dst, imm        | dst /= imm
+CTR | 0x35             | jge dst, imm, +off    | PC += off if dst >= imm
+ALU | 0x37             | div dst, imm          | dst /= imm
+MEM | 0x38             | ldabsdw src, dst, imm | ...
+ALU | 0x3c             | div32 dst, src        | dst /= src
+CTR | 0x3d             | jge dst, src, +off    | PC += off if dst >= src
+ALU | 0x3f             | div dst, src          | dst /= src
+MEM | 0x40             | ldindw src, dst, imm  | ...
+ALU | 0x44             | or32 dst, imm         | dst \|= imm
+CTR | 0x45             | jset dst, imm, +off   | PC += off if dst & imm
+ALU | 0x47             | or dst, imm           | dst \|= imm
+MEM | 0x48             | ldindh src, dst, imm  | ...
+ALU | 0x4c             | or32 dst, src         | dst \|= src
+CTR | 0x4d             | jset dst, src, +off   | PC += off if dst & src
+MEM | 0x4f             | or dst, src           | dst \|= src
+MEM | 0x50             | ldindb src, dst, imm  | ...
+ALU | 0x54             | and32 dst, imm        | dst &= imm
+CTR | 0x55             | jne dst, imm, +off    | PC += off if dst != imm
+ALU | 0x57             | and dst, imm          | dst &= imm
+MEM | 0x58             | ldinddw src, dst, imm | ...
+ALU | 0x5c             | and32 dst, src        | dst &= src
+CTR | 0x5d             | jne dst, src, +off    | PC += off if dst != src
+ALU | 0x5f             | and dst, src          | dst &= src
+MEM | 0x61             | ldxw dst, [src+off]   | dst = *(uint32_t *) (src + off)
+MEM | 0x62             | stw [dst+off], imm    | *(uint32_t *) (dst + off) = imm
+MEM | 0x63             | stxw [dst+off], src   | *(uint32_t *) (dst + off) = src
+ALU | 0x64             | lsh32 dst, imm        | dst <<= imm
+CTR | 0x65             | jsgt dst, imm, +off   | PC += off if dst > imm (signed)
+ALU | 0x67             | lsh dst, imm          | dst <<= imm
+MEM | 0x69             | ldxh dst, [src+off]   | dst = *(uint16_t *) (src + off)
+MEM | 0x6a             | sth [dst+off], imm    | *(uint16_t *) (dst + off) = imm
+MEM | 0x6b             | stxh [dst+off], src   | *(uint16_t *) (dst + off) = src
+ALU | 0x6c             | lsh32 dst, src        | dst <<= src
+CTR | 0x6d             | jsgt dst, src, +off   | PC += off if dst > src (signed)
+ALU | 0x6f             | lsh dst, src          | dst <<= src
+MEM | 0x71             | ldxb dst, [src+off]   | dst = *(uint8_t *) (src + off)
+MEM | 0x72             | stb [dst+off], imm    | *(uint8_t *) (dst + off) = imm
+MEM | 0x73             | stxb [dst+off], src   | *(uint8_t *) (dst + off) = src
+ALU | 0x74             | rsh32 dst, imm        | dst >>= imm (logical)
+CTR | 0x75             | jsge dst, imm, +off   | PC += off if dst >= imm (signed) 
+ALU | 0x77             | rsh dst, imm          | dst >>= imm (logical)
+MEM | 0x79             | ldxdw dst, [src+off]  | dst = *(uint64_t *) (src + off)
+MEM | 0x7a             | stdw [dst+off], imm   | *(uint64_t *) (dst + off) = imm
+MEM | 0x7b             | stxdw [dst+off], src  | *(uint64_t *) (dst + off) = src
+MEM | 0x7c             | rsh32 dst, src        | dst >>= src (logical)
+CTR | 0x7d             | jsge dst, src, +off   | PC += off if dst >= src (signed) 
+ALU | 0x7f             | rsh dst, src          | dst >>= src (logical)
+ALU | 0x84             | neg32 dst             | dst = -dst
+CTR | 0x85             | call imm              | Function call
+ALU | 0x87             | neg dst               | dst = -dst
+ALU | 0x94             | mod32 dst, imm        | dst %= imm
+CTR | 0x95             | exit                  | return r0
+ALU | 0x97             | mod dst, imm          | dst %= imm
+ALU | 0x9c             | mod32 dst, src        | dst %= src
+ALU | 0x9f             | mod dst, src          | dst %= src
+ALU | 0xa4             | xor32 dst, imm        | dst ^= imm
+CTR | 0xa5             | jlt dst, imm, +off    | PC += off if dst < imm
+ALU | 0xa7             | xor dst, imm          | dst ^= imm
+ALU | 0xac             | xor32 dst, src        | dst ^= src
+CTR | 0xad             | jlt dst, src, +off    | PC += off if dst < src
+ALU | 0xaf             | xor dst, src          | dst ^= src
+ALU | 0xb4             | mov32 dst, imm        | dst = imm
+ALU | 0xb5             | jle dst, imm, +off    | PC += off if dst <= imm
+ALU | 0xb7             | mov dst, imm          | dst = imm
+ALU | 0xbc             | mov32 dst, src        | dst = src
+CTR | 0xbd             | jle dst, src, +off    | PC += off if dst <= src
+ALU | 0xbf             | mov dst, src          | dst = src
+ALU | 0xc4             | arsh32 dst, imm       | dst >>= imm (arithmetic)
+CTR | 0xc5             | jslt dst, imm, +off   | PC += off if dst < imm (signed)
+ALU | 0xc7             | arsh dst, imm         | dst >>= imm (arithmetic)
+ALU | 0xcc             | arsh32 dst, src       | dst >>= src (arithmetic)
+CTR | 0xcd             | jslt dst, src, +off   | PC += off if dst < src (signed)
+ALU | 0xcf             | arsh dst, src         | dst >>= src (arithmetic)
+ALU | 0xd4 (imm == 16) | le16 dst              | dst = htole16(dst)
+ALU | 0xd4 (imm == 32) | le32 dst              | dst = htole32(dst)
+ALU | 0xd4 (imm == 64) | le64 dst              | dst = htole64(dst)
+CTR | 0xd5             | jsle dst, imm, +off   | PC += off if dst <= imm (signed)
+ALU | 0xdc (imm == 16) | be16 dst              | dst = htobe16(dst)
+ALU | 0xdc (imm == 32) | be32 dst              | dst = htobe32(dst)
+ALU | 0xdc (imm == 64) | be64 dst              | dst = htobe64(dst)
+CTR | 0xdd             | jsle dst, src, +off   | PC += off if dst <= src (signed) 
