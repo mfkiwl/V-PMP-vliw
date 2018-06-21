@@ -1,0 +1,23 @@
+ldxh      [14]
+jeq      #0x86dd          jt 2	jf 10
+ldxb      [22]
+jeq      #0x84            jt 6	jf 4
+jeq      #0x6             jt 6	jf 5
+jeq      #0x11            jt 6	jf 23
+ldxh      [56]
+jeq      #0x50            jt 22	jf 8
+ldxh      [58]
+jeq      #0x50            jt 22	jf 23
+jeq      #0x800           jt 11	jf 23
+ldxb      [25]
+jeq      #0x84            jt 15	jf 13
+jeq      #0x6             jt 15	jf 14
+jeq      #0x11            jt 15	jf 23
+ldxh      [22]
+jset     #0x1fff          jt 23	jf 17
+ldxb     4*([16]&0xf)
+ldxh      [x + 16]
+jeq      #0x50            jt 22	jf 20
+ldxh      [x + 18]
+jeq      #0x50            jt 22	jf 23
+exit     
