@@ -106,31 +106,31 @@ package common_pkg is
   
   -- Branch OPCODES
 
-  constant JA_OPC  : std_logic_vector(7 downto 0) := "00000100";
-  constant JEQI_OPC   : std_logic_vector(7 downto 0) := "00001100";
-  constant JEQ_OPC  : std_logic_vector(7 downto 0) := "00010100";
-  constant JGTI_OPC   : std_logic_vector(7 downto 0) := "00011100";
-  constant JGT_OPC  : std_logic_vector(7 downto 0) := "00100100";
-  constant JGEI_OPC   : std_logic_vector(7 downto 0) := "00101100";
-  constant JGE_OPC  : std_logic_vector(7 downto 0) := "00110100";
-  constant JLTI_OPC   : std_logic_vector(7 downto 0) := "00111100";
-  constant JLT_OPC   : std_logic_vector(7 downto 0) := "01000100";
-  constant JLEI_OPC    : std_logic_vector(7 downto 0) := "01001100";
-  constant JLE_OPC  : std_logic_vector(7 downto 0) := "01010100";
-  constant JSETI_OPC   : std_logic_vector(7 downto 0) := "01011100";
-  constant JSET_OPC  : std_logic_vector(7 downto 0) := "01100100";
-  constant JNEI_OPC   : std_logic_vector(7 downto 0) := "01101100";
-  constant JNE_OPC  : std_logic_vector(7 downto 0) := "01110100";
-  constant JSGTIS_OPC   : std_logic_vector(7 downto 0) := "01111100";
-  constant JSGTS_OPC   : std_logic_vector(7 downto 0) := "10000100";
-  constant JSGEIS_OPC  : std_logic_vector(7 downto 0) := "10010100";
-  constant JSGES_OPC   : std_logic_vector(7 downto 0) := "10011100";
-  constant JSLTIS_OPC  : std_logic_vector(7 downto 0) := "10100100";
-  constant JSLTS_OPC   : std_logic_vector(7 downto 0) := "10101100";
-  constant JSLEIS_OPC  : std_logic_vector(7 downto 0) := "10110100";
-  constant JSLES_OPC   : std_logic_vector(7 downto 0) := "10111100";
-  constant CALL_OPC : std_logic_vector(7 downto 0) := "11000100";
-  constant EXIT_OPC  : std_logic_vector(7 downto 0) := "11001100";
+  constant JA_OPC     : std_logic_vector(7 downto 0) := "00000101";
+  constant JEQI_OPC   : std_logic_vector(7 downto 0) := "00010101";
+  constant JEQ_OPC    : std_logic_vector(7 downto 0) := "00011101";
+  constant JGTI_OPC   : std_logic_vector(7 downto 0) := "00100101";
+  constant JGT_OPC    : std_logic_vector(7 downto 0) := "00101101";
+  constant JGEI_OPC   : std_logic_vector(7 downto 0) := "00110101";
+  constant JGE_OPC    : std_logic_vector(7 downto 0) := "00111101";
+  constant JLTI_OPC   : std_logic_vector(7 downto 0) := "10100101";
+  constant JLT_OPC    : std_logic_vector(7 downto 0) := "10101101";
+  constant JLEI_OPC   : std_logic_vector(7 downto 0) := "10110101";
+  constant JLE_OPC    : std_logic_vector(7 downto 0) := "10111101";
+  constant JSETI_OPC  : std_logic_vector(7 downto 0) := "01000101";
+  constant JSET_OPC   : std_logic_vector(7 downto 0) := "01001101";
+  constant JNEI_OPC   : std_logic_vector(7 downto 0) := "01010101";
+  constant JNE_OPC    : std_logic_vector(7 downto 0) := "01011101";
+  constant JSGTIS_OPC : std_logic_vector(7 downto 0) := "01100101";
+  constant JSGTS_OPC  : std_logic_vector(7 downto 0) := "01101101";
+  constant JSGEIS_OPC : std_logic_vector(7 downto 0) := "01110101";
+  constant JSGES_OPC  : std_logic_vector(7 downto 0) := "01111101";
+  constant JSLTIS_OPC : std_logic_vector(7 downto 0) := "11000101";
+  constant JSLTS_OPC  : std_logic_vector(7 downto 0) := "11001101";
+  constant JSLEIS_OPC : std_logic_vector(7 downto 0) := "11010101";
+  constant JSLES_OPC  : std_logic_vector(7 downto 0) := "11011101";
+  constant CALL_OPC   : std_logic_vector(7 downto 0) := "10000101";
+  constant EXIT_OPC   : std_logic_vector(7 downto 0) := "10010101";
 
 end common_pkg;
 
