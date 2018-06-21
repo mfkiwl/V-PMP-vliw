@@ -10,10 +10,10 @@ package common_pkg is
 
   -- Group class of opcodes
 
-  constant R_TYPE : std_logic_vector(5 downto 0) := "00----";
-  constant I_TYPE_1 : std_logic_vector(5 downto 0) := "01----";
-  constant I_TYPE_2 : std_logic_vector(5 downto 0) := "10----";
-  constant J_TYPE : std_logic_vector(5 downto 0) := "11----";
+  constant ALU64 : std_logic_vector(7 downto 0) := "-----111";
+  constant ALU32 : std_logic_vector(7 downto 0) := "-----100"; -- including byteswap OPC
+  constant MEM   : std_logic_vector(7 downto 0) := "0----0--";
+  constant BRCH  : std_logic_vector(7 downto 0) := "-----101";
 
   -- NOP opcode (not in official eBPF instruction set)
 
