@@ -15,10 +15,6 @@ package common_pkg is
   constant I_TYPE_2 : std_logic_vector(5 downto 0) := "10----";
   constant J_TYPE : std_logic_vector(5 downto 0) := "11----";
 
-  -- NOP opcode (not in official eBPF instruction set)
-
-  constant NOP_OPC  : std_logic_vector(7 downto 0) := "00000000";
-  
   -- ALU-64 OPCODES
 
   constant ADDI_OPC  : std_logic_vector(7 downto 0) := "00000111";
@@ -75,62 +71,15 @@ package common_pkg is
   constant ARSHI32_OPC : std_logic_vector(7 downto 0) := "11000100";
   constant ARSH32_OPC  : std_logic_vector(7 downto 0) := "11001100";
 
-  -- Byteswap OPCODES
+  -- J_TYPE OPCODES
 
-  constant LE_OPC      : std_logic_vector(7 downto 0) := "11010100"; -- multiple instruction for same opcode -> depends on the immediate
-  constant BE_OPC      : std_logic_vector(7 downto 0) := "11011100"; -- multiple instruction for same opcode -> depends on the immediate
-  
-  -- Memory OPCODES
-  
-  constant LDDW_OPC    : std_logic_vector(7 downto 0) := "00011000";
-  constant LDABSW_OPC  : std_logic_vector(7 downto 0) := "00100000";
-  constant LDABSH_OPC  : std_logic_vector(7 downto 0) := "00101000";
-  constant LDABSB_OPC  : std_logic_vector(7 downto 0) := "00110000";
-  constant LDABSDW_OPC : std_logic_vector(7 downto 0) := "00111000";
-  constant LDINDW_OPC  : std_logic_vector(7 downto 0) := "01000000";
-  constant LDINDH_OPC  : std_logic_vector(7 downto 0) := "01001000";
-  constant LDINDB_OPC  : std_logic_vector(7 downto 0) := "01010000";
-  constant LDINDDW_OPC : std_logic_vector(7 downto 0) := "01011000";
-  constant LDXW_OPC    : std_logic_vector(7 downto 0) := "01100001";
-  constant LDXH_OPC    : std_logic_vector(7 downto 0) := "01101001";
-  constant LDXB_OPC    : std_logic_vector(7 downto 0) := "01110001";
-  constant LDXDW_OPC   : std_logic_vector(7 downto 0) := "01111001";
-  constant STW_OPC     : std_logic_vector(7 downto 0) := "01100010";
-  constant STH_OPC     : std_logic_vector(7 downto 0) := "01101010";
-  constant STB_OPC     : std_logic_vector(7 downto 0) := "01110010";
-  constant STDW_OPC    : std_logic_vector(7 downto 0) := "01111010";
-  constant STXW_OPC    : std_logic_vector(7 downto 0) := "01100011";
-  constant STXH_OPC    : std_logic_vector(7 downto 0) := "01101011";
-  constant STXB_OPC    : std_logic_vector(7 downto 0) := "01110011";
-  constant STXDW_OPC   : std_logic_vector(7 downto 0) := "01111011";
-  
-  -- Branch OPCODES
+  constant BRT_OPC  : std_logic_vector(5 downto 0) := "110000";  -- branch on true condition
+  constant BRF_OPC  : std_logic_vector(5 downto 0) := "110001";  -- branch on false condition
+  constant JMP_OPC  : std_logic_vector(5 downto 0) := "110010";  -- goto
 
-  constant JA_OPC  : std_logic_vector(7 downto 0) := "00000100";
-  constant JEQI_OPC   : std_logic_vector(7 downto 0) := "00001100";
-  constant JEQ_OPC  : std_logic_vector(7 downto 0) := "00010100";
-  constant JGTI_OPC   : std_logic_vector(7 downto 0) := "00011100";
-  constant JGT_OPC  : std_logic_vector(7 downto 0) := "00100100";
-  constant JGEI_OPC   : std_logic_vector(7 downto 0) := "00101100";
-  constant JGE_OPC  : std_logic_vector(7 downto 0) := "00110100";
-  constant JLTI_OPC   : std_logic_vector(7 downto 0) := "00111100";
-  constant JLT_OPC   : std_logic_vector(7 downto 0) := "01000100";
-  constant JLEI_OPC    : std_logic_vector(7 downto 0) := "01001100";
-  constant JLE_OPC  : std_logic_vector(7 downto 0) := "01010100";
-  constant JSETI_OPC   : std_logic_vector(7 downto 0) := "01011100";
-  constant JSET_OPC  : std_logic_vector(7 downto 0) := "01100100";
-  constant JNEI_OPC   : std_logic_vector(7 downto 0) := "01101100";
-  constant JNE_OPC  : std_logic_vector(7 downto 0) := "01110100";
-  constant JSGTIS_OPC   : std_logic_vector(7 downto 0) := "01111100";
-  constant JSGTS_OPC   : std_logic_vector(7 downto 0) := "10000100";
-  constant JSGEIS_OPC  : std_logic_vector(7 downto 0) := "10010100";
-  constant JSGES_OPC   : std_logic_vector(7 downto 0) := "10011100";
-  constant JSLTIS_OPC  : std_logic_vector(7 downto 0) := "10100100";
-  constant JSLTS_OPC   : std_logic_vector(7 downto 0) := "10101100";
-  constant JSLEIS_OPC  : std_logic_vector(7 downto 0) := "10110100";
-  constant JSLES_OPC   : std_logic_vector(7 downto 0) := "10111100";
-  constant CALL_OPC : std_logic_vector(7 downto 0) := "11000100";
-  constant EXIT_OPC  : std_logic_vector(7 downto 0) := "11001100";
-
+  -- MISC
+  
+  
+  
 end common_pkg;
 
