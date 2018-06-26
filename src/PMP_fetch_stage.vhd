@@ -147,13 +147,13 @@ begin
 
         -- source registers prefetch 
         gr_src_0 <= syllable_0_s(15 downto 12);
-        gr_src_1 <= syllable_0_s(15 downto 12);
-        gr_src_2 <= syllable_0_s(15 downto 12);
-        gr_src_3 <= syllable_0_s(15 downto 12);
-        gr_src_4 <= syllable_0_s(15 downto 12);
-        gr_src_5 <= syllable_0_s(15 downto 12);
-        gr_src_6 <= syllable_0_s(15 downto 12);
-        gr_src_7 <= syllable_0_s(15 downto 12);
+        gr_src_1 <= syllable_1_s(15 downto 12);
+        gr_src_2 <= syllable_2_s(15 downto 12);
+        gr_src_3 <= syllable_3_s(15 downto 12);
+        gr_src_4 <= syllable_4_s(15 downto 12);
+        gr_src_5 <= syllable_5_s(15 downto 12);
+        gr_src_6 <= syllable_6_s(15 downto 12);
+        gr_src_7 <= syllable_7_s(15 downto 12);
 
       end if;
     end if;

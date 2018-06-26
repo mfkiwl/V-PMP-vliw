@@ -15,36 +15,23 @@ entity decode_stage is
          stop                  : in std_logic; 
          branch                : in std_logic;    
 
-         syllable              : in std_logic_vector(31 downto 0);
+         syllable              : in std_logic_vector(63 downto 0);
 
-         oper_0_add            : in std_logic_vector(4 downto 0);
-         oper_1_add            : in std_logic_vector(4 downto 0);      
-         operand_0             : in std_logic_vector(31 downto 0); -- from GP register file
-         operand_1             : in std_logic_vector(31 downto 0);  -- from GP register file
-         br_cont_in            : in std_logic; -- from BR file
-         br_current_data_write : in std_logic;
-         br_current_add_write  : in std_logic_vector(4 downto 0);
+         src_reg_add           : in std_logic_vector(3 downto 0);
+         src_reg_cont          : in std_logic_vector(63 downto 0);  -- from GP register file
 
-         exe_result            : in std_logic_vector(31 downto 0); -- lane forwarding
-         alu_oper_0            : out std_logic_vector(31 downto 0);
-         alu_oper_1            : out std_logic_vector(31 downto 0);
+         exe_result            : in std_logic_vector(63 downto 0);  -- result from EXE stage for lane forwarding
+         alu_operand           : out std_logic_vector(63 downto 0);
          alu_immediate         : out std_logic_vector(10 downto 0);
-         exe_opc               : out std_logic_vector(1 downto 0); --execution stage opc 00=alu, 01=control, 10= mem
-         alu_dest              : out std_logic_vector(4 downto 0); -- alu destination register for writeback 
-         current_gr_wrt        : in std_logic_vector(4 downto 0);       
+         exe_opc               : out std_logic_vector(1 downto 0);  -- execution stage opc 00=alu, 01=control, 10= mem
+         alu_dest_reg          : out std_logic_vector(3 downto 0);  -- alu destination register for writeback 
+         wb_reg_add            : in std_logic_vector(3 downto 0);   -- current register address in writeback     
 
-         mem_dest_reg          : out std_logic_vector(4 downto 0); -- destination register for load
-         mem_store_d           : out std_logic_vector(31 downto 0); -- data to store      
-         mem_l_s               : out std_logic;  -- '0' for load, '1' for store
-         mem_add               : out std_logic_vector(31 downto 0); -- memory address for load and store
-
-         mem_data_loaded       : in std_logic_vector(31 downto 0);
-
-         br_reg_add            : out std_logic_vector(4 downto 0);
-         jump_add              : out std_logic_vector(7 downto 0);
-         br_cont_out           : out std_logic;
-
-         syllable_out          : out std_logic_vector(31 downto 0)
+         mem_dest_reg_add      : out std_logic_vector(3 downto 0);  -- destination register for load
+         mem_store_data        : out std_logic_vector(63 downto 0); -- data to store      
+         mem_l_s               : out std_logic;                     -- '0' for load, '1' for store
+         mem_add               : out std_logic_vector(63 downto 0); -- memory address for load and store
+         mem_load_data         : in std_logic_vector(63 downto 0)     -- data incoming from memory
 
        );
 
@@ -55,8 +42,8 @@ architecture Behavioral of decode_stage is
   type decode_states is (reset_state, decoding);
   signal current_state, next_state: decode_states;
 
-  signal mem_base_add_s : std_logic_vector(31 downto 0) := (others => '0');
-  signal mem_offset_s   : std_logic_vector(15 downto 0) := (others => '0');
+  signal mem_base_add_s : std_logic_vector(63 downto 0) := (others => '0');
+  signal mem_offset_s   : std_logic_vector(31 downto 0) := (others => '0');
 
 begin
 
@@ -69,7 +56,6 @@ begin
       if (reset = '0') then  
 
           alu_oper_0        <= (others => '0'); 
-          alu_oper_1        <= (others => '0'); 
           alu_immediate     <= (others => '0'); 
           alu_dest          <= (others => '0');
           exe_opc           <= (others => '0'); 
