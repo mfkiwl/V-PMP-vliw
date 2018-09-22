@@ -12,7 +12,6 @@ entity decode_stage is
     Port (
              clk                   : in std_logic;
              reset                 : in std_logic;
-             stop                  : in std_logic; 
              branch                : in std_logic;    
 
              syllable              : in std_logic_vector(63 downto 0);
@@ -36,12 +35,6 @@ end decode_stage;
 
 architecture Behavioral of decode_stage is
 
-    type decode_states is (reset_state, decoding);
-    signal current_state, next_state: decode_states;
-
---signal mem_base_add_s : std_logic_vector(63 downto 0) := (others => '0');
---signal mem_offset_s   : std_logic_vector(31 downto 0) := (others => '0');
-
 begin
 
     decode_output: process(clk)
@@ -50,7 +43,7 @@ begin
 
         if rising_edge(clk) then
 
-            if (reset = '0') then
+            if (reset = '1') then
 
                 exe_operand   <= (others => '0');  
                 exe_immediate <= (others => '0');
@@ -61,7 +54,16 @@ begin
             else
                 -- DECODING
 
-                exe_operand   <= src_reg_cont;
+                if (wb_reg_add = src_reg_add) then
+                    
+                    exe_operand <= exe_result; -- LANE FORWARDING
+                
+                else
+                    
+                     exe_operand   <= src_reg_cont;
+                     
+                end if;
+                
                 exe_immediate <= syllable(63 downto 32);
                 exe_dest_reg  <= syllable (15 downto 12);
 
@@ -84,9 +86,9 @@ begin
                 end if;
 
             end if;
-   
+
         end if;
-   
+
     end process;
 
 end Behavioral;

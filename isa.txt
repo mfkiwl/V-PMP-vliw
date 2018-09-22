@@ -1,10 +1,10 @@
-ALU | 0x04             | add32 dst, imm        | dst += imm                       
-ALU | 0x07             | add dst, imm          | dst += imm                       
-ALU | 0x0c             | add32 dst, src        | dst += src                       
-ALU | 0x0f             | add dst, src          | dst += src                       
-ALU | 0x14             | sub32 dst, imm        | dst -= imm                       
-ALU | 0x17             | sub dst, imm          | dst -= imm                       
-ALU | 0x18             | lddw dst, imm         | dst = imm                         
+ALU | 0x04             | add32 dst, imm        | dst += imm
+ALU | 0x07             | add dst, imm          | dst += imm
+ALU | 0x0c             | add32 dst, src        | dst += src
+ALU | 0x0f             | add dst, src          | dst += src
+ALU | 0x14             | sub32 dst, imm        | dst -= imm
+ALU | 0x17             | sub dst, imm          | dst -= imm
+ALU | 0x18             | lddw dst, imm         | dst = imm
 ALU | 0x1c             | sub32 dst, src        | dst -= src
 ALU | 0x1f             | sub dst, src          | dst -= src
 ALU | 0x24             | mul32 dst, imm        | dst *= imm
@@ -54,9 +54,9 @@ ALU | 0xd4 (imm == 64) | le64 dst              | dst = htole64(dst)
 ALU | 0xdc (imm == 16) | be16 dst              | dst = htobe16(dst)
 ALU | 0xdc (imm == 32) | be32 dst              | dst = htobe32(dst)
 ALU | 0xdc (imm == 64) | be64 dst              | dst = htobe64(dst)
-CTR | 0x05             | ja +off               | PC += off                          
-CTR | 0x15             | jeq dst, imm, +off    | PC += off if dst == imm          
-CTR | 0x1d             | jeq dst, src, +off    | PC += off if dst == src          
+CTR | 0x05             | ja +off               | PC += off
+CTR | 0x15             | jeq dst, imm, +off    | PC += off if dst == imm
+CTR | 0x1d             | jeq dst, src, +off    | PC += off if dst == src
 CTR | 0x25             | jgt dst, imm, +off    | PC += off if dst > imm
 CTR | 0x2d             | jgt dst, src, +off    | PC += off if dst > src
 CTR | 0x35             | jge dst, imm, +off    | PC += off if dst >= imm
@@ -67,8 +67,8 @@ CTR | 0x55             | jne dst, imm, +off    | PC += off if dst != imm
 CTR | 0x5d             | jne dst, src, +off    | PC += off if dst != src
 CTR | 0x65             | jsgt dst, imm, +off   | PC += off if dst > imm (signed)
 CTR | 0x6d             | jsgt dst, src, +off   | PC += off if dst > src (signed)
-CTR | 0x75             | jsge dst, imm, +off   | PC += off if dst >= imm (signed) 
-CTR | 0x7d             | jsge dst, src, +off   | PC += off if dst >= src (signed) 
+CTR | 0x75             | jsge dst, imm, +off   | PC += off if dst >= imm (signed)
+CTR | 0x7d             | jsge dst, src, +off   | PC += off if dst >= src (signed)
 CTR | 0x85             | call imm              | Function call
 CTR | 0x95             | exit                  | return r0
 CTR | 0xa5             | jlt dst, imm, +off    | PC += off if dst < imm
@@ -77,7 +77,7 @@ CTR | 0xbd             | jle dst, src, +off    | PC += off if dst <= src
 CTR | 0xc5             | jslt dst, imm, +off   | PC += off if dst < imm (signed)
 CTR | 0xcd             | jslt dst, src, +off   | PC += off if dst < src (signed)
 CTR | 0xd5             | jsle dst, imm, +off   | PC += off if dst <= imm (signed)
-CTR | 0xdd             | jsle dst, src, +off   | PC += off if dst <= src (signed) 
+CTR | 0xdd             | jsle dst, src, +off   | PC += off if dst <= src (signed)
 MEM | 0x20             | ldabsw src, dst, imm  | See kernel documentation
 MEM | 0x28             | ldabsh src, dst, imm  | ...
 MEM | 0x30             | ldabsb src, dst, imm  | ...
@@ -99,4 +99,4 @@ MEM | 0x73             | stxb [dst+off], src   | *(uint8_t *) (dst + off) = src
 MEM | 0x79             | ldxdw dst, [src+off]  | dst = *(uint64_t *) (src + off)
 MEM | 0x7a             | stdw [dst+off], imm   | *(uint64_t *) (dst + off) = imm
 MEM | 0x7b             | stxdw [dst+off], src  | *(uint64_t *) (dst + off) = src
-MEM | 0x7c             | rsh32 dst, src        | dst >>= src (logical)
+MEM | 0x7c | rsh32 dst, src | dst >>= src (logical)
