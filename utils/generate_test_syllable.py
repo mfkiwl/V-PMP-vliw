@@ -23,7 +23,7 @@ while (len(offset) > 4):
     print("Too Big");
     offset = input("Insert offset(2 byte): ");
 
-while (len(opcode) < 4):
+while (len(offset) < 4):
     print("Too Small");
     opcode = input("Insert offset(2 byte): ");
 
