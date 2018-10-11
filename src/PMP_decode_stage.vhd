@@ -19,8 +19,8 @@ entity decode_stage is
              src_reg_add           : in std_logic_vector(3 downto 0);   -- from fetch stage
              src_reg_cont          : in std_logic_vector(63 downto 0);  -- from GP register file
 
-             exe_operand           : out std_logic_vector(63 downto 0); 
-             exe_immediate         : out std_logic_vector(31 downto 0);
+             exe_operand           : out std_logic_vector(63 downto 0); -- SRC reg content
+             exe_immediate         : out std_logic_vector(31 downto 0); -- immediate in the instruction
              exe_opc               : out std_logic_vector(1 downto 0);  -- execution stage opc 00=alu64, 01=alu32, 10= mem, 11= branch
              exe_dest_reg          : out std_logic_vector(3 downto 0);  -- exe stage destination register for writeback 
              exe_offset            : out std_logic_vector(15 downto 0);
