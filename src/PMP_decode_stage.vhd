@@ -10,20 +10,23 @@ use work.common_pkg.all;
 entity decode_stage is
 
     Port (
-             clk                   : in std_logic;
-             reset                 : in std_logic;
-             branch                : in std_logic;    
+             clk                       : in std_logic;
+             reset                     : in std_logic;
+             branch                    : in std_logic;    
 
-             syllable              : in std_logic_vector(63 downto 0);
+             syllable                  : in std_logic_vector(63 downto 0);
 
-             src_reg_add           : in std_logic_vector(3 downto 0);   -- from fetch stage
-             src_reg_cont          : in std_logic_vector(63 downto 0);  -- from GP register file
+             src_reg_add               : in std_logic_vector(3 downto 0);   -- from fetch stage
+             src_reg_cont              : in std_logic_vector(63 downto 0);  -- from GP register file
+             dst_reg_add               : in std_logic_vector(3 downto 0);   -- from fetch stage
+             dst_reg_cont              : in std_logic_vector(63 downto 0);  -- from GP register file
 
-             exe_operand           : out std_logic_vector(63 downto 0); -- SRC reg content
-             exe_immediate         : out std_logic_vector(31 downto 0); -- immediate in the instruction
-             exe_opc               : out std_logic_vector(1 downto 0);  -- execution stage opc 00=alu64, 01=alu32, 10= mem, 11= branch
-             exe_dest_reg          : out std_logic_vector(3 downto 0);  -- exe stage destination register for writeback 
-             exe_offset            : out std_logic_vector(15 downto 0);
+             exe_operand_src           : out std_logic_vector(63 downto 0); -- SRC reg content
+             exe_operand_dst           : out std_logic_vector(63 downto 0); -- DST reg content
+             exe_immediate             : out std_logic_vector(31 downto 0); -- immediate in the instruction
+             exe_opc                   : out std_logic_vector(1 downto 0);  -- execution stage opc 00=alu64, 01=alu32, 10= mem, 11= branch
+             exe_dest_reg              : out std_logic_vector(3 downto 0);  -- exe stage destination register for writeback 
+             exe_offset                : out std_logic_vector(15 downto 0);
 
              -- READ BUS FOR PREFETCH
              dbus_addr_read        : out std_logic_vector(63 downto 0);  -- data bus address read for memory prefetch
@@ -47,24 +50,23 @@ begin
 
         if rising_edge(clk) then
 
-            if (reset = '1') then
 
-                exe_operand    <= (others => '0');  
-                exe_immediate  <= (others => '0');
-                exe_opc        <= (others => '0');
-                exe_dest_reg   <= (others => '0');
-                exe_offset     <= (others => '0');
+            exe_operand    <= (others => '0');  
+            exe_immediate  <= (others => '0');
+            exe_opc        <= (others => '0');
+            exe_dest_reg   <= (others => '0');
+            exe_offset     <= (others => '0');
 
-            else
+            if (reset = '0') then
                 -- DECODING
 
-                if (wb_reg_add = src_reg_add) then
+                if (wb_reg_add = dst_reg_add) then
 
-                    exe_operand <= exe_result; -- LANE FORWARDING
+                    exe_operand_dst <= exe_result; -- LANE FORWARDING on dst reg
 
                 else
 
-                    exe_operand   <= src_reg_cont;
+                    exe_operand_dst   <= dst_reg_cont;
 
                 end if;
 

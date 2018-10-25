@@ -10,7 +10,7 @@ entity fetch_stage is
   port ( 
          clk        : in std_logic; -- system clock
          reset      : in std_logic; -- system reset
-         instr      : in std_logic_vector(511 downto 0); -- instruction (4 or 8 syllables)
+         instr      : in std_logic_vector(511 downto 0); -- instruction ==> 8 syllables
          start      : in std_logic; -- '1' when to start execution of PMP
          stop       : in std_logic; -- '1' when STOP syllable is decoded
          branch     : in std_logic; -- '1' when flush pipeline because branch
@@ -34,6 +34,15 @@ entity fetch_stage is
          gr_src_5     : out std_logic_vector (3 downto 0);
          gr_src_6     : out std_logic_vector (3 downto 0);
          gr_src_7     : out std_logic_vector (3 downto 0);
+         
+         gr_dst_0     : out std_logic_vector (3 downto 0); -- address of first operand of syllable 0
+         gr_dst_1     : out std_logic_vector (3 downto 0);
+         gr_dst_2     : out std_logic_vector (3 downto 0);
+         gr_dst_3     : out std_logic_vector (3 downto 0); 
+         gr_dst_4     : out std_logic_vector (3 downto 0);
+         gr_dst_5     : out std_logic_vector (3 downto 0);
+         gr_dst_6     : out std_logic_vector (3 downto 0);
+         gr_dst_7     : out std_logic_vector (3 downto 0);
 
          cycles     : out std_logic_vector(31 downto 0); -- number of clock cycles the execution took
          pc_inc     : out std_logic                      -- increment Program Counter
@@ -126,6 +135,15 @@ begin
       gr_src_6 <= (others => '0'); 
       gr_src_7 <= (others => '0'); 
 
+      gr_dst_0 <= (others => '0'); 
+      gr_dst_1 <= (others => '0'); 
+      gr_dst_2 <= (others => '0'); 
+      gr_dst_3 <= (others => '0'); 
+      gr_dst_4 <= (others => '0'); 
+      gr_dst_5 <= (others => '0'); 
+      gr_dst_6 <= (others => '0'); 
+      gr_dst_7 <= (others => '0'); 
+      
       pc_inc <= '0';
       running_s <= '0';
 
@@ -154,6 +172,15 @@ begin
         gr_src_5 <= syllable_5_s(15 downto 12);
         gr_src_6 <= syllable_6_s(15 downto 12);
         gr_src_7 <= syllable_7_s(15 downto 12);
+        
+        gr_dst_0 <= syllable_0_s(11 downto 8);
+        gr_dst_1 <= syllable_1_s(11 downto 8);
+        gr_dst_2 <= syllable_2_s(11 downto 8);
+        gr_dst_3 <= syllable_3_s(11 downto 8);
+        gr_dst_4 <= syllable_4_s(11 downto 8);
+        gr_dst_5 <= syllable_5_s(11 downto 8);
+        gr_dst_6 <= syllable_6_s(11 downto 8);
+        gr_dst_7 <= syllable_7_s(11 downto 8);
 
       end if;
     end if;
