@@ -37,11 +37,9 @@ begin
     alu_control : process(syllable, alu64_select, operand, immediate, gr_add_dst)
 
     begin
-
         result_gr <= (others => '0');
         gr_add_w <= (others => '0');
         w_e_gr <= '0';
-
 
         if (alu64_select = '1') then -- START EXECUTING
 
@@ -202,6 +200,12 @@ begin
                     result_gr <= shift_right(signed(operand_dst),unsigned(operand_src));
                     gr_add_wrt <= gr_add_dst;
                     w_e_gr <= '1';
+
+                when others =>
+
+                    result_gr <= (others => '0');
+                    gr_add_w <= (others => '0');
+                    w_e_gr <= '0';
 
             end case;
 

@@ -204,6 +204,12 @@ begin
                     gr_add_wrt <= gr_add_dst;
                     w_e_gr <= '1';
 
+                when others =>
+
+                    result_gr <= (others => '0');
+                    gr_add_w <= (others => '0');
+                    w_e_gr <= '0';
+
             end case;
 
         end if;
