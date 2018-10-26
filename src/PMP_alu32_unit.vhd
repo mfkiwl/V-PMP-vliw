@@ -6,10 +6,10 @@ use ieee.numeric_std.all;
 library work;
 use work.common_pkg.all;
 
-entity alu64 is
+entity alu32 is
     Port ( 
 
-             alu64_select     : in std_logic;
+             alu32_select     : in std_logic;
 
              syllable         : in std_logic_vector(63 downto 0); 
              operand_src      : in std_logic_vector(63 downto 0);
@@ -24,9 +24,9 @@ entity alu64 is
 
 );
 
-end alu64;
+end alu32;
 
-architecture Behavioral of alu64 is
+architecture Behavioral of alu32 is
 
     signal opc : std_logic_vector(7 downto 0);
 
