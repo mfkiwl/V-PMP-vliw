@@ -51,7 +51,8 @@ begin
         if rising_edge(clk) then
 
 
-            exe_operand    <= (others => '0');  
+            exe_operand_src    <= (others => '0'); 
+            exe_operand_dst <= (others => '0'); 
             exe_immediate  <= (others => '0');
             exe_opc        <= (others => '0');
             exe_dest_reg   <= (others => '0');

@@ -78,8 +78,8 @@ entity gr_regfile is
              add_dst_7_fetch  : in std_logic_vector(3 downto 0); -- address of syllable 7 dst reg from fetch stage
              w_e_7            : in std_logic;
              cont_src_7       : out std_logic_vector(63 downto 0); -- syllable 7 source operand
-             cont_dst_7_exe   : in std_logic_vector(63 downto 0)  -- syllable 7 result from execution stage
-             cont_dst_7_fetch : out std_logic_vector(63 downto 0);  -- syllable 7 preftech from fetch stage
+             cont_dst_7_exe   : in std_logic_vector(63 downto 0);  -- syllable 7 result from execution stage
+             cont_dst_7_fetch : out std_logic_vector(63 downto 0)  -- syllable 7 preftech from fetch stage
 
 );
 
