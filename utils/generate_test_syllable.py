@@ -25,7 +25,7 @@ while (len(offset) > 4):
 
 while (len(offset) < 4):
     print("Too Small");
-    opcode = input("Insert offset(2 byte): ");
+    offset = input("Insert offset(2 byte): ");
 
 #IMMEDIATE
 immediate = input("Insert immediate(4 byte): ");
