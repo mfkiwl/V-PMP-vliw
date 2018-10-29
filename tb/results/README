@@ -1,7 +1,0 @@
-|--------+-----+------------+------------+------------+-----------+-------------+------------+------------+------------+
-| cycles | SYL | syllable_0 | syllable_1 | syllable_2 | syllable_3 | syllable_4 | syllable_5 | syllable_6 | syllable_7 | fetch_out_syllable.txt
-|--------+-----+------------+------------+-----------+-------------+------------+------------+------------+------------+
-| cycles | S_R | src_reg_add_0  | src_reg_add_1 | src_reg_add_2 | src_reg_add_3 | src_reg_add_4 | src_reg_add_5 | src_reg_add_6 | src_reg_add_7 | fetch_out_syllable.txt
-|--------+-----+------------+------------+-----------+-------------+------------+------------+------------+------------+
-| cycles | D_R | syllable_0 | syllable_1 | syllable_2 | syllable_3 | syllable_4 | syllable_5 | syllable_6 | syllable_7 | fetch_out_syllable.txt
-|--------+-----+------------+------------+-----------+-------------+------------+------------+------------+------------+
