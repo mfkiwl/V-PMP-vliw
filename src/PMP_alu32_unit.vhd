@@ -3,6 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use ieee.std_logic_signed.all;
 use ieee.numeric_std.all;
 
+
 library work;
 use work.common_pkg.all;
 
@@ -151,7 +152,7 @@ begin
 
                 when NEG_OPC =>
 
-                    result_gr(31 downto 0) <= std_logic_vector(signed(operand_dst(31 downto 0))*-1);
+                    result_gr(31 downto 0) <= std_logic_vector(signed(operand_dst(31 downto 0))*(-1));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
