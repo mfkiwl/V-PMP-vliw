@@ -19,7 +19,7 @@ entity alu64 is
 
              gr_add_w         : out std_logic_vector(3 downto 0);
              w_e_gr           : out std_logic;
-             result_gr        : out std_logic_vector(63 downto 0);
+             result_gr        : out std_logic_vector(63 downto 0)
 
 
 );
@@ -28,13 +28,17 @@ end alu64;
 
 architecture Behavioral of alu64 is
 
+
+    signal operand_dst_int, immediate_int : integer;
     signal opc : std_logic_vector(7 downto 0);
 
 begin
 
     opc <= syllable(7 downto 0);
+    operand_dst_int <= to_integer(unsigned(operand_dst));
+    immediate_int <= to_integer(unsigned(immediate));
 
-    alu_control : process(syllable, alu64_select, operand, immediate, gr_add_dst)
+    alu_control : process(syllable, alu64_select, operand_src, operand_dst, immediate, gr_add_dst)
 
     begin
         result_gr <= (others => '0');
@@ -53,7 +57,7 @@ begin
 
                 when ADDI_OPC =>
 
-                    result_gr <= operand_dst + (0x"00000000" & immediate);
+                    result_gr <= operand_dst + (x"00000000" & immediate);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
@@ -65,7 +69,7 @@ begin
 
                 when SUBI_OPC =>
 
-                    result_gr <= operand_dst - (0x"00000000" & immediate);
+                    result_gr <= operand_dst - (x"00000000" & immediate);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
@@ -101,7 +105,7 @@ begin
 
                 when ORI_OPC =>
 
-                    result_gr <= operand_dst or  0x"00000000" & immediate;
+                    result_gr <= operand_dst or  x"00000000" & immediate;
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
@@ -113,7 +117,7 @@ begin
 
                 when ANDI_OPC =>
 
-                    result_gr <= operand_dst and  0x"00000000" & immediate;
+                    result_gr <= operand_dst and  x"00000000" & immediate;
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
@@ -125,7 +129,7 @@ begin
 
                 when LSHI_OPC =>
 
-                    result_gr <= shift_left(unsigned(operand_dst),unsigned(immediate));
+                    result_gr <= shift_left(operand_dst_int,immediate_int); -- result_gr PER USARE QUESTA FUNZIONE result_gr result_gr DEVE ESSERE unsigned no std_logic_vector
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
@@ -149,7 +153,7 @@ begin
 
                 when NEG_OPC =>
 
-                    result_gr <= std_logic_vector(signed(operand_dst)*-1);
+                    result_gr <= std_logic_vector(signed(operand_dst)*(-1));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
@@ -161,13 +165,13 @@ begin
 
                 when MOD_OPC =>
 
-                    result_gr <= std_logic_vector(signed(operand_dst) mod signed(operand_src)));
+                    result_gr <= std_logic_vector(signed(operand_dst) mod signed(operand_src));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
                 when XORI_OPC =>
 
-                    result_gr <= operand_dst xor 0x"00000000" & immediate;
+                    result_gr <= operand_dst xor x"00000000" & immediate;
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
@@ -179,7 +183,7 @@ begin
 
                 when MOVI_OPC =>
 
-                    result_gr <= 0x"00000000" & immediate;
+                    result_gr <= x"00000000" & immediate;
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 

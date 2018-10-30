@@ -34,9 +34,10 @@ end mem_pmp;
 
 architecture Behavioral of mem_pmp is
 
+
 begin
 
-  MEM_UNIT:     process (mem_select_n, syllable, mem_dest_reg, mem_l_s, mem_data_w, data_from_mem, mem_add_dec)               
+MEM_UNIT:process (mem_select_n, syllable, mem_dest_reg, mem_l_s, mem_data_w, data_from_mem, mem_add_dec)               
 
   begin
 

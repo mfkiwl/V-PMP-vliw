@@ -28,7 +28,7 @@ end alu32;
 architecture Behavioral of alu32 is
 
     signal opc : std_logic_vector(7 downto 0);
-
+    
 begin
 
     opc <= syllable(7 downto 0);
@@ -127,7 +127,7 @@ begin
 
                 when LSHI_OPC =>
 
-                    result_gr(31 downto 0) <= shift_left(operand_dst(31 downto 0),immediate);
+                    result_gr(31 downto 0) <= shift_left(unsigned(operand_dst(31 downto 0)),unsigned(immediate)); -- result_gr PER USARE QUESTA FUNZIONE result_gr result_gr DEVE ESSERE unsigned no std_logic_vector
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
@@ -163,7 +163,7 @@ begin
 
                 when MOD_OPC =>
 
-                    result_gr(31 downto 0) <= std_logic_vector(signed(operand_dst(31 downto 0)) mod signed(operand_src(31 downto 0))));
+                    result_gr(31 downto 0) <= std_logic_vector(signed(operand_dst(31 downto 0)) mod signed(operand_src(31 downto 0)));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
