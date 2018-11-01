@@ -35,9 +35,7 @@ architecture Behavioral of alu64 is
 begin
 
     opc <= syllable(7 downto 0);
-    operand_dst_int <= to_integer(unsigned(operand_dst));
-    immediate_int <= to_integer(unsigned(immediate));
-
+  
     alu_control : process(syllable, alu64_select, operand_src, operand_dst, immediate, gr_add_dst)
 
     begin
@@ -97,7 +95,7 @@ begin
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when DIVI_OPC =>
+                when DIV_OPC => -- when DIVI_OPC
 
                     result_gr <= std_logic_vector(to_signed(to_integer(signed(operand_dst) / signed(operand_src)),64));
                     gr_add_w <= gr_add_dst;
@@ -129,25 +127,29 @@ begin
 
                 when LSHI_OPC =>
 
-                    result_gr <= shift_left(operand_dst_int,immediate_int); -- result_gr PER USARE QUESTA FUNZIONE result_gr result_gr DEVE ESSERE unsigned no std_logic_vector
+                    result_gr <= std_logic_vector(shift_left(unsigned(operand_dst),to_integer(unsigned(immediate))));
+--                    result_gr <= shift_left(operand_dst_int,immediate_int); -- result_gr PER USARE QUESTA FUNZIONE result_gr result_gr DEVE ESSERE unsigned no std_logic_vector
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
                 when LSH_OPC =>
-
-                    result_gr <= shift_left(unsigned(operand_dst),unsigned(operand_src));
+                
+                    result_gr <= std_logic_vector(shift_left(unsigned(operand_dst),to_integer(unsigned(operand_src))));
+--                    result_gr <= shift_left(unsigned(operand_dst),unsigned(operand_src));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
                 when RSHI_OPC =>
-
-                    result_gr <= shift_right(unsigned(operand_dst),unsigned(immediate));
+                
+                    result_gr <= std_logic_vector(shift_right(unsigned(operand_dst),to_integer(unsigned(immediate))));
+--                    result_gr <= shift_right(unsigned(operand_dst),unsigned(immediate));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
                 when RSH_OPC =>
 
-                    result_gr <= shift_right(unsigned(operand_dst),unsigned(operand_src));
+                    result_gr <= std_logic_vector(shift_right(unsigned(operand_dst),to_integer(unsigned(operand_src))));
+--                    result_gr <= shift_right(unsigned(operand_dst),unsigned(operand_src));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
@@ -195,13 +197,15 @@ begin
 
                 when ARSHI_OPC =>
 
-                    result_gr <= shift_right(signed(operand_dst),unsigned(immediate));
+                    result_gr <= std_logic_vector(shift_right(signed(operand_dst),to_integer(unsigned(immediate))));
+--                    result_gr <= shift_right(signed(operand_dst),unsigned(immediate));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
                 when ARSH_OPC =>
-
-                    result_gr <= shift_right(signed(operand_dst),unsigned(operand_src));
+                
+                    result_gr <= std_logic_vector(shift_right(unsigned(operand_dst),to_integer(unsigned(operand_src))));
+--                    result_gr <= shift_right(signed(operand_dst),unsigned(operand_src));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 

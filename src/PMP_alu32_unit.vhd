@@ -48,159 +48,162 @@ begin
 
             case opc is 
 
-                when NOP_OPC =>
+                when NOP32_OPC =>
 
                     result_gr <= (others => '0');
                     gr_add_w <= (others => '0');
                     w_e_gr <= '0';
 
-                when ADDI_OPC =>
+                when ADDI32_OPC =>
 
                     result_gr(31 downto 0) <= operand_dst(31 downto 0)(31 downto 0) + (immediate);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when ADD_OPC =>
+                when ADD32_OPC =>
 
                     result_gr(31 downto 0) <= operand_dst(31 downto 0) + operand_src(31 downto 0);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when SUBI_OPC =>
+                when SUBI32_OPC =>
 
                     result_gr(31 downto 0) <= operand_dst(31 downto 0) - (immediate);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when SUB_OPC =>
+                when SUB32_OPC =>
 
                     result_gr(31 downto 0) <= operand_dst(31 downto 0) - operand_src(31 downto 0);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when MULI_OPC =>
+                when MULI32_OPC =>
 
                     result_gr(31 downto 0) <= std_logic_vector(signed(immediate)*signed(operand_dst(31 downto 0)));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when MUL_OPC =>
+                when MUL32_OPC =>
 
                     result_gr(31 downto 0) <= std_logic_vector(signed(operand_src(31 downto 0))*signed(operand_dst(31 downto 0)));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when DIVI_OPC =>
+                when DIVI32_OPC =>
 
                     result_gr(31 downto 0) <= std_logic_vector(to_signed(to_integer(signed(operand_dst(31 downto 0)) / signed(immediate)),64));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when DIVI_OPC =>
+                when DIV32_OPC => -- when DIVI_OPC
 
                     result_gr(31 downto 0) <= std_logic_vector(to_signed(to_integer(signed(operand_dst(31 downto 0)) / signed(operand_src(31 downto 0))),64));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when ORI_OPC =>
+                when ORI32_OPC =>
 
                     result_gr(31 downto 0) <= operand_dst(31 downto 0) or immediate;
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when OR_OPC =>
+                when OR32_OPC =>
 
                     result_gr(31 downto 0) <= operand_dst(31 downto 0) or operand_src(31 downto 0);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when ANDI_OPC =>
+                when ANDI32_OPC =>
 
                     result_gr(31 downto 0) <= operand_dst(31 downto 0) and immediate;
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when AND_OPC =>
+                when AND32_OPC =>
 
                     result_gr(31 downto 0) <= operand_dst(31 downto 0) and operand_src(31 downto 0);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when LSHI_OPC =>
+                when LSHI32_OPC =>
 
-                    result_gr(31 downto 0) <= shift_left(unsigned(operand_dst(31 downto 0)),unsigned(immediate)); -- result_gr PER USARE QUESTA FUNZIONE result_gr result_gr DEVE ESSERE unsigned no std_logic_vector
+                    result_gr(31 downto 0) <= std_logic_vector(shift_left(unsigned(operand_dst(31 downto 0)), to_integer(unsigned(immediate)))); -- result_gr PER USARE QUESTA FUNZIONE result_gr result_gr DEVE ESSERE unsigned no std_logic_vector
+                    --result_gr(31 downto 0) <= shift_left(unsigned(operand_dst(31 downto 0)),unsigned(immediate)); -- result_gr PER USARE QUESTA FUNZIONE result_gr result_gr DEVE ESSERE unsigned no std_logic_vector
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
                 when LSH_OPC =>
 
-                    result_gr(31 downto 0) <= shift_left(unsigned(operand_dst(31 downto 0)),unsigned(operand_src(31 downto 0)));
+                    result_gr(31 downto 0) <= std_logic_vector(shift_left(unsigned(operand_dst(31 downto 0)),to_integer(unsigned(operand_src(31 downto 0)))));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when RSHI_OPC =>
-
-                    result_gr(31 downto 0) <= shift_right(unsigned(operand_dst(31 downto 0)),unsigned(immediate));
+                when RSHI32_OPC =>
+                    result_gr(31 downto 0) <= std_logic_vector(shift_left(unsigned(operand_dst(31 downto 0)),to_integer(unsigned(immediate))));
+--                    result_gr(31 downto 0) <= std_logic_vector(shift_right(unsigned(operand_dst(31 downto 0)),o_integer(unsigned(immediate))));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when RSH_OPC =>
-
-                    result_gr(31 downto 0) <= shift_right(unsigned(operand_dst(31 downto 0)),unsigned(operand_src(31 downto 0)));
+                when RSH32_OPC =>
+                    result_gr(31 downto 0) <= std_logic_vector(shift_left(unsigned(operand_dst(31 downto 0)),to_integer(unsigned(operand_src(31 downto 0)))));
+--                    result_gr(31 downto 0) <= std_logic_vector(shift_right(unsigned(operand_dst(31 downto 0)),unsigned(operand_src(31 downto 0))));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when NEG_OPC =>
+                when NEG32_OPC =>
 
                     result_gr(31 downto 0) <= std_logic_vector(signed(operand_dst(31 downto 0))*(-1));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when MODI_OPC =>
+                when MODI32_OPC =>
 
                     result_gr(31 downto 0) <= std_logic_vector(signed(operand_dst(31 downto 0)) mod signed(immediate));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when MOD_OPC =>
+                when MOD32_OPC =>
 
                     result_gr(31 downto 0) <= std_logic_vector(signed(operand_dst(31 downto 0)) mod signed(operand_src(31 downto 0)));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when XORI_OPC =>
+                when XORI32_OPC =>
 
                     result_gr(31 downto 0) <= operand_dst(31 downto 0) xor immediate;
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when XOR_OPC =>
+                when XOR32_OPC =>
 
                     result_gr(31 downto 0) <= operand_dst(31 downto 0) xor operand_src(31 downto 0);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when MOVI_OPC =>
+                when MOVI32_OPC =>
 
                     result_gr(31 downto 0) <= immediate;
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when MOV_OPC =>
+                when MOV32_OPC =>
 
                     result_gr(31 downto 0) <= operand_src(31 downto 0);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when ARSHI_OPC =>
-
-                    result_gr(31 downto 0) <= shift_right(signed(operand_dst(31 downto 0)),unsigned(immediate));
+                when ARSHI32_OPC =>
+                
+                    result_gr(31 downto 0) <= std_logic_vector(shift_right(signed(operand_dst(31 downto 0)),to_integer(unsigned(immediate))));
+--                    result_gr(31 downto 0) <= shift_right(signed(operand_dst(31 downto 0)),unsigned(immediate));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when ARSH_OPC =>
-
-                    result_gr(31 downto 0) <= shift_right(signed(operand_dst(31 downto 0)),unsigned(operand_src(31 downto 0)));
+                when ARSH32_OPC =>
+                
+                    result_gr(31 downto 0) <= std_logic_vector(shift_right(signed(operand_dst(31 downto 0)),to_integer(unsigned(operand_src(31 downto 0)))));
+--                    result_gr(31 downto 0) <= shift_right(signed(operand_dst(31 downto 0)),unsigned(operand_src(31 downto 0)));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 

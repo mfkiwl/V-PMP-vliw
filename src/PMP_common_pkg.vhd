@@ -17,7 +17,8 @@ package common_pkg is
 
   -- NOP opcode (not in official eBPF instruction set)
 
-  constant NOP_OPC  : std_logic_vector(7 downto 0) := "00000000";
+  constant NOP_OPC  : std_logic_vector(7 downto 0)   := "00000000";
+  constant NOP32_OPC  : std_logic_vector(7 downto 0) := "00000000";
   
   -- ALU-64 OPCODES
 
