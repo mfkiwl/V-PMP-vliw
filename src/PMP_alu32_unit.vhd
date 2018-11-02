@@ -147,7 +147,7 @@ begin
                     w_e_gr <= '1';
                     opc_string <= "_LSHI";
 
-                when LSH_OPC =>
+                when LSH32_OPC =>
 
                     result_gr_red <= std_logic_vector(shift_left(unsigned(operand_dst(31 downto 0)),to_integer(unsigned(operand_src(31 downto 0)))));
                     gr_add_w <= gr_add_dst;
