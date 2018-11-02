@@ -14,6 +14,7 @@ entity exe_stage_complete is
              exe_opc                   : in std_logic_vector(1 downto 0);  -- execution stage opc 00=alu64, 01=alu32, 10= mem, 11= branch
              exe_dst_addr              : in std_logic_vector(3 downto 0);  -- exe stage destination register for writeback 
              exe_offset                : in std_logic_vector(15 downto 0); -- offset inside instruction
+             exe_data_from_mem         : in std_logic_vector(63 downto 0); -- data from mem prefetched by instruction decode
 
              exe_result                : out std_logic_vector(63 downto 0);  -- result from EXE stage for lane forwarding and writeback
              wb_reg_add                : out std_logic_vector(3 downto 0)   -- current register address in writeback from exe stage  -> for lane forwrding   

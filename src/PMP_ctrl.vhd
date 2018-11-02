@@ -263,6 +263,13 @@ begin
                     PC_addr <= immediate(15 downto 0);
                     PC_stop <= '1';
 
+                when others =>
+
+                    PC_addr <= (others => '0');
+                    PC_load <= '0';
+                    PC_add <= '0';
+                    PC_stop <= '0';
+
                 end if
 
             end case;
