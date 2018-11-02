@@ -80,13 +80,13 @@ begin
 
                 when MULI32_OPC =>
 
-                    result_gr(31 downto 0) <= std_logic_vector(signed(immediate)*signed(operand_dst(31 downto 0)));
+                    result_gr(31 downto 0) <= std_logic_vector(unsigned(immediate)*unsigned(operand_dst(31 downto 0)));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
                 when MUL32_OPC =>
 
-                    result_gr(31 downto 0) <= std_logic_vector(signed(operand_src(31 downto 0))*signed(operand_dst(31 downto 0)));
+                    result_gr(31 downto 0) <= std_logic_vector(unsigned(operand_src(31 downto 0))*unsigned(operand_dst(31 downto 0)));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
@@ -133,7 +133,7 @@ begin
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
-                when LSH_OPC =>
+                when LSH32_OPC =>
 
                     result_gr(31 downto 0) <= std_logic_vector(shift_left(unsigned(operand_dst(31 downto 0)),to_integer(unsigned(operand_src(31 downto 0)))));
                     gr_add_w <= gr_add_dst;

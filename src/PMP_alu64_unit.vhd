@@ -47,7 +47,7 @@ begin
 
                 when NOP_OPC =>
 
-                    result_gr_s <= (others => '0');
+                    result_gr <= (others => '0');
                     gr_add_w <= (others => '0');
                     w_e_gr <= '0';
 
@@ -76,14 +76,16 @@ begin
                     w_e_gr <= '1';
 
                 when MULI_OPC =>
-
-                    result_gr <= std_logic_vector(unsigned(immediate*unsigned(operand_dst(31 downto 0)));
+                
+                    result_gr <= std_logic_vector(unsigned(immediate)*unsigned(operand_dst(31 downto 0)));
+--                    result_gr <= std_logic_vector(unsigned(immediate*unsigned(operand_dst(31 downto 0)));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
                 when MUL_OPC =>
-
-                    result_gr <= std_logic_vector(signed(operand_src)*signed(operand_dst));
+                
+                    result_gr <= std_logic_vector(unsigned(operand_src(31 downto 0))*unsigned(operand_dst(31 downto 0)));
+--                    result_gr <= std_logic_vectorsigned(operand_src)*signed(operand_dst);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
@@ -148,14 +150,15 @@ begin
                     w_e_gr <= '1';
 
                 when NEG_OPC =>
-
-                    result_gr <= std_logic_vector(signed(operand_dst)*(-1));
+                
+                    result_gr <= not(operand_dst) +1; --complemento a due
+--                    result_gr <= std_logic_vector(signed(operand_dst)*(-1));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
                 when MODI_OPC =>
 
-                    result_gr <= std_logic_vector(signed(operand_dst) mod signed(immediate));
+                    result_gr <= x"00000000" & std_logic_vector(signed(operand_dst) mod signed(immediate));
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
 
