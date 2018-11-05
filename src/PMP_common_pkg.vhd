@@ -118,9 +118,9 @@ package common_pkg is
   constant JLT_OPC    : std_logic_vector(7 downto 0) := "10101101";
   constant JLEI_OPC   : std_logic_vector(7 downto 0) := "10110101";
   constant JLE_OPC    : std_logic_vector(7 downto 0) := "10111101";
-  constant JSETI_OPC  : std_logic_vector(7 downto 0) := "01000101";
-  constant JSET_OPC   : std_logic_vector(7 downto 0) := "01001101";
-  constant JNEI_OPC   : std_logic_vector(7 downto 0) := "01010101";
+  constant JSETI_OPC  : std_logic_vector(7 downto 0) := "01000101"; -- 0x45
+  constant JSET_OPC   : std_logic_vector(7 downto 0) := "01001101"; -- 0x4d
+  constant JNEI_OPC   : std_logic_vector(7 downto 0) := "01010101"; -- 
   constant JNE_OPC    : std_logic_vector(7 downto 0) := "01011101";
   constant JSGTIS_OPC : std_logic_vector(7 downto 0) := "01100101";
   constant JSGTS_OPC  : std_logic_vector(7 downto 0) := "01101101";
