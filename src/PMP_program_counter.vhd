@@ -7,66 +7,84 @@ use work.common_pkg.all;
 
 entity pc is
 
-  generic (
+    Port ( 
 
-            I_MEM_WIDTH : integer := 8
+             clk        : in std_logic;
+             inc        : in std_logic; -- '1' to increment program counter, from fetch stage
+             rst        : in std_logic; -- '1' to reset program counter, from outside
 
-          );
+         -- from the control unit
+             pc_addr   : in std_logic_vector(15 downto 0); -- branch address from control unit
+             pc_add    : in std_logic;    
+             pc_stop   : in std_logic;
+             pc_load   : in std_logic;
 
-  Port ( 
-
-         clk        : in std_logic;
-         inc        : in std_logic; -- '1' to increment program counter, from fetch stage
-         rst        : in std_logic; -- '1' to reset program counter, from outside
-
-         branch_exe     : in std_logic; -- '1' to load the branch address, from exe stage
-         branch_add_exe   : in std_logic_vector(I_MEM_WIDTH-1 downto 0); -- branch address from control unit
-
-         PC         : out std_logic_vector(I_MEM_WIDTH-1 downto 0) -- program counter out
-       );
+             PC         : out std_logic_vector(15 downto 0) -- program counter out
+         );
 
 end pc;
 
 architecture Behavioral of pc is
 
-  signal pc_s : std_logic_vector(I_MEM_WIDTH-1 downto 0) := (others =>'1');
-
-attribute mark_debug: string;
-attribute keep:string;
-attribute mark_debug of pc_s :signal is "TRUE";
-attribute keep of pc_s :signal is "TRUE";
-
+    signal pc_s : std_logic_vector(15 downto 0) := (others =>'1');
+    signal stop_toggle : std_logic:= '0';
 
 begin
 
- process (clk)
- begin
-    if rising_edge (clk) then
-        
-    if (rst = '0') then
-        
-        if (inc = '1') then
-            
-            pc_s <= pc_s + 1;
-            
+    TOGGLE_STOP:process(clk)
+    begin
+        if rising_edge(clk) then
+           
+            if (rst = '1') then
+
+                stop_toggle <= '0';
+
+            else
+
+                if (pc_stop = '1') or (stop_toggle = '1') then
+
+                    stop_toggle <= '1';
+
+                end if;
+
+            end if;
+
         end if;
-            
-        if (branch_exe = '1') then
-        
-            pc_s <= branch_add_exe;
-        
-        end if;
-    
-    else
-            
-        pc_s <= (others => '1');
-      
-    end if;
-    
-    end if;  
-    
- end process;
-    
-  PC <= pc_s;
+    end process;
+
+
+    process (clk)
+    begin
+        if rising_edge (clk) then
+
+            if (rst = '0') then
+
+                if (inc = '1') and (stop_toggle = '0') then
+
+                    pc_s <= pc_s + 1;
+
+                end if;
+
+                if (pc_add = '1') then
+
+                    pc_s <= pc_s + pc_addr;
+
+                elsif (pc_load = '1') then
+
+                    pc_s <= pc_addr;
+
+                end if;
+
+            else
+
+                pc_s <= (others => '1');
+
+            end if;
+
+        end if;  
+
+    end process;
+
+    PC <= pc_s;
 
 end Behavioral;

@@ -1,73 +1,169 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use ieee.numeric_std.all;
 use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
 
 library work;
 use work.common_pkg.all;
 
-entity mem_pmp is
 
-    Port ( 
+entity memory_unit is
 
-             mem_select  : in std_logic;
+    Port (
+             mem_select       : in std_logic;
+             reset            : in std_logic;
 
-             syllable         : in std_logic_vector(63 downto 0); 
-             operand_src      : in std_logic_vector(63 downto 0);
-             operand_dst      : in std_logic_vector(63 downto 0);
+             syllable         : in std_logic_vector (63 downto 0);
              immediate        : in std_logic_vector(31 downto 0);
-             gr_add_dst       : in std_logic_vector(3 downto 0); -- destination register
-             data_from_mem    : in std_logic_vector(63 downto 0);
+             offset           : in std_logic_vector(15 downto 0);
+             operand_src      : in std_logic_vector (63 downto 0);
+             operand_dst      : in std_logic_vector (63 downto 0);
+             gr_add_dst       : in std_logic_vector (3 downto 0);
 
-             -- STORE
-             data_to_mem      : out std_logic_vector(63 downto 0);
-             addr_to_mem      : out std_logic_vector(63 downto 0);
-             w_e_mem          : out std_logic;
-
-             -- LOAD
+             -- MEMORY INTERFACE
+             mem_data_in      : in std_logic_vector (63 downto 0);
+             mem_data_out     : out std_logic_vector (63 downto 0);
+             mem_read_addr     : out std_logic_vector (63 downto 0);
+             mem_wrt_addr     : out std_logic_vector (63 downto 0);
+             mem_wrt_en       : out std_logic;
+             -- GPR INTERFACE
              gr_add_w         : out std_logic_vector(3 downto 0);
              w_e_gr           : out std_logic;
              result_gr        : out std_logic_vector(63 downto 0)
-
-
          );
-end mem_pmp;
 
-architecture Behavioral of mem_pmp is
+end memory_unit;
 
-    signal opc: std_logic_vector(7 downto 0);
+architecture Behavioral of memory_unit is
+
+    signal opc : std_logic_vector (7 downto 0);
 
 begin
 
     opc <= syllable(7 downto 0);
 
-    process (mem_select, opc, data_from_mem, gr_add_dst,immediate, operand_dst, operand_src)               
-
+    RAM_MEMORY : process (opc, mem_select, operand_src, operand_dst, immediate, gr_add_dst, reset)
     begin
 
-        if(mem_select = '0') then
+        mem_data_out <= (others => '0');  
+        mem_read_addr <= (others => '0');     
+        mem_wrt_addr <= (others => '0');     
+        mem_wrt_en  <= '0';
+        gr_add_w <= (others => '0');
+        w_e_gr <= '0';
+        result_gr <= (others => '0');
 
-            data_to_mem <= (others => '0');  
-            addr_to_mem <= (others => '0');
-            w_e_mem     <= '0'; 
-
-            gr_add_w    <= (others => '0'); 
-            w_e_gr      <= '0';
-            result_gr   <= (others => '0');
-
-
-        else
+        if (mem_select = '1') and (reset = '0') then
 
             case opc is
-                 -- LOAD
-                when LDDW_OPC =>
 
-                    -- POOR DOCUMENTATION => TODO
+                --LOAD
+                when LDDW_OPC => 
 
-                when LDABSW_OPC =>
+                    result_gr <= mem_data_in;
+                    gr_add_w <= gr_add_dst;
+                    w_e_gr <= '1';
+                    mem_read_addr <= x"00000000" & immediate;
+
+                when LDXW_OPC => 
+
+                    result_gr(31 downto 0) <= mem_data_in(31 downto 0);
+                    gr_add_w <= gr_add_dst;
+                    w_e_gr <= '1';
+                    mem_read_addr <= operand_dst + x"0000000000" & offset ;
+
+                when LDXH_OPC => 
+
+                    result_gr(15 downto 0) <= mem_data_in(15 downto 0);
+                    gr_add_w <= gr_add_dst;
+                    w_e_gr <= '1';
+                    mem_read_addr <= operand_dst + x"0000000000" & offset ;
+
+                when LDXB_OPC => 
+
+                    result_gr(7 downto 0) <= mem_data_in(7 downto 0);
+                    gr_add_w <= gr_add_dst;
+                    w_e_gr <= '1';
+                    mem_read_addr <= operand_dst + x"0000000000" & offset ;
+
+                when LDXDW_OPC => 
+
+                    result_gr <= mem_data_in;
+                    gr_add_w <= gr_add_dst;
+                    w_e_gr <= '1';
+                    mem_read_addr <= operand_dst + x"0000000000" & offset ;
+
+                -- STORE 
+                when STW_OPC   => 
+
+                    mem_data_out(31 downto 0) <= immediate;
+                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_en <= '1';
+
+
+                when STH_OPC   => 
+
+                    mem_data_out(15 downto 0) <= immediate(15 downto 0);
+                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_en <= '1';
+
+                when STB_OPC   =>
+
+                    mem_data_out(7 downto 0) <= immediate(7 downto 0);
+                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_en <= '1';
+
+                when STDW_OPC  =>
+
+                    mem_data_out <= x"00000000" & immediate;
+                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_en <= '1';
+
+                when STXW_OPC  => 
+
+                    mem_data_out(31 downto 0) <= operand_src(31 downto 0);
+                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_en <= '1';
+
+                when STXH_OPC  => 
+
+                    mem_data_out(15 downto 0) <= operand_src(15 downto 0);
+                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_en <= '1';
+
+                when STXB_OPC  => 
+
+                    mem_data_out(7 downto 0) <= operand_src(7 downto 0);
+                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_en <= '1';
+
+                when STXDW_OPC => 
+
+                    mem_data_out <= operand_src;
+                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_en <= '1';
+
+                when others =>    
+        
+                    mem_data_out <= (others => '0');  
+                    mem_read_addr <= (others => '0');     
+                    mem_wrt_addr <= (others => '0');     
+                    mem_wrt_en  <= '0';
+                    gr_add_w <= (others => '0');
+                    w_e_gr <= '0';
+                    result_gr <= (others => '0');
 
             end case;
-        end if;
-    end process;
 
+        end if;
+    --when LDABSW_OPC =>      SEE KERNEL DOCUMENTATION                                                     
+    --            when LDABSH_OPC =>                                                            
+    --            when LDABSB_OPC =>                                                           
+    --            when LDABSDW_OPC =>                                                            
+    --            when LDINDW_OPC =>                                                           
+    --            when LDINDH_OPC =>                                                            
+    --            when LDINDB_OPC =>                                                           
+    --            when LDINDDW_OPC =>     
+
+    end process;
 end Behavioral;
