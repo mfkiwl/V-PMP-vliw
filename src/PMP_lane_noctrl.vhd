@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity lane_0 is
+entity lane_noctrl is
     Port ( 
              clk        : in std_logic;
              reset      : in std_logic;
@@ -29,9 +29,9 @@ entity lane_0 is
 
          );
 
-end lane_0;
+end lane_noctrl;
 
-architecture Behavioral of lane_0 is
+architecture Behavioral of lane_noctrl is
 
     -- INTERFACE FROM DECODE TO EXE STAGE
     signal  exe_syllable_s    : std_logic_vector(63 downto 0);
