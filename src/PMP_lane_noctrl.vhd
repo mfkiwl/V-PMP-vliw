@@ -1,139 +1,118 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- lane for syllable 1 to 3
+entity lane_0 is
+    Port ( 
+             clk        : in std_logic;
+             reset      : in std_logic;
+             stop       : in std_logic;   
+             branch     : in std_logic;
 
-entity lane_1_3 is
-  Port ( 
-         clk        : in std_logic;                                                                  
-         reset      : in std_logic;                                                                  
-         stop       : in std_logic; 
-         branch     : in std_logic;                                                                                                          
+             syllable_0 : in std_logic_vector(31 downto 0);
 
-         syllable_0 : in std_logic_vector(31 downto 0);   
+             add_src     : in std_logic_vector(3 downto 0);
+             add_dst     : in std_logic_vector(3 downto 0);
+             gr_src_cont : in std_logic_vector(63 downto 0); -- syllable 0 first operand               
+             gr_dst_cont : in std_logic_vector(63 downto 0); -- syllable 0 second operand              
 
-         add_0_0     : in std_logic_vector(4 downto 0);
-         add_0_1     : in std_logic_vector(4 downto 0);                                                                                    
-         cont_0_0    : in std_logic_vector(31 downto 0); -- syllable 0 first operand                 
-         cont_0_1    : in std_logic_vector(31 downto 0); -- syllable 0 second operand                
+             -- GPR REGISTERS INTERFACE
+             exe_result        : out std_logic_vector(63 downto 0);  -- result from EXE stage for lane forwarding and writeback
+             w_e_wb            : out std_logic;
+             wb_reg_add        : out std_logic_vector(3 downto 0);   -- current register address in writeback from exe stage   
 
-         br_cont_0   : in std_logic;  -- content from branch register pointend in prefetch           
+             -- MEMORY INTERFACE
+             mem_data_in      : in std_logic_vector (63 downto 0);
+             mem_data_out     : out std_logic_vector (63 downto 0);
+             mem_read_addr    : out std_logic_vector (63 downto 0);
+             mem_wrt_addr     : out std_logic_vector (63 downto 0);
+             mem_wrt_en       : out std_logic
 
-        -- Memory interface                                                                         
-         mem_add_wrt  : out std_logic_vector(31 downto 0); -- write address for memory 
-         mem_add_read : out std_logic_vector(31 downto 0);              
-         mem_data_out : out std_logic_vector(31 downto 0); -- data to write to memory
-         mem_wrt_amnt    : out std_logic_vector(4 downto 0);  -- number of bits written to memory                
-         mem_data_in  : in std_logic_vector(31 downto 0);  -- Data from memory                       
-         mem_w_e      : out std_logic;                     -- memory write enable                    
-                                                           -- BR and GR interface                                                                      
-         gr_add_w     : out std_logic_vector(4 downto 0);  -- address of GR register to be written   
-         gr_data_w    : out std_logic_vector(31 downto 0); -- data to write to GR                    
-         br_add_w     : out std_logic_vector(4 downto 0);  -- address of BR register to be written   
-         br_data_w    : out std_logic;                     -- data to write to BR                    
-         gr_w_e       : out std_logic;                     -- write enable for GR                    
-         br_w_e       : out std_logic                     -- write enable for BR                    
-       );
-end lane_1_3;
+         );
 
-architecture Behavioral of lane_1_3 is
+end lane_0;
 
-  signal alu_oper_0_s    : std_logic_vector(31 downto 0);                              
-  signal alu_oper_1_s    : std_logic_vector(31 downto 0);                              
-  signal alu_immediate_s : std_logic_vector(10 downto 0);                           
-  signal exe_opc_s       : std_logic_vector(1 downto 0); -- execution unit opcode   
-  signal alu_dest_s      : std_logic_vector(4 downto 0);                            
-  signal alu_shamt_s     : std_logic_vector(4 downto 0);                            
-  signal mem_dest_reg_s  : std_logic_vector(4 downto 0);                            
-  signal mem_store_d_s   : std_logic_vector(31 downto 0);                           
-  signal mem_offset_s    : std_logic_vector(15 downto 0);                           
-  signal mem_base_add_s  : std_logic_vector(31 downto 0);                           
-  signal mem_l_s_s       : std_logic;                                               
-  signal mem_add_s       : std_logic_vector(31 downto 0);                           
-  signal br_exe_add_s    : std_logic_vector(4 downto 0);                            
-  signal jump_add_s      : std_logic_vector(7 downto 0);                            
-  signal br_0_cont_s     : std_logic;     
-  signal syllable_to_exe : std_logic_vector(31 downto 0);
-  signal gr_add_w_s       : std_logic_vector(4 downto 0);
-  signal gr_data_w_s : std_logic_vector(31 downto 0);
+architecture Behavioral of lane_0 is
 
+    -- INTERFACE FROM DECODE TO EXE STAGE
+    signal  exe_syllable_s    : std_logic_vector(63 downto 0);
+    signal  exe_operand_src_s : std_logic_vector(63 downto 0);
+    signal  exe_operand_dst_s : std_logic_vector(63 downto 0);
+    signal  exe_immediate_s   : std_logic_vector(31 downto 0);
+    signal  exe_opc_s         : std_logic_vector(1 downto 0);
+    signal  exe_dest_reg_s    : std_logic_vector(3 downto 0);
+    signal  exe_offset_s      : std_logic_vector(15 downto 0);
+
+    -- OUTPUTS FROM EXECUTION
+    signal exe_out_dst_addr_s     : std_logic_vector(3 downto 0); 
+    signal exe_out_result_s       : std_logic_vector(63 downto 0); 
+
+    -- LANE FORWARDING
+    signal exe_forward_result : std_logic_vector(63 downto 0);
+    signal exe_forward_addr   : std_logic_vector(3 downto 0);
 
 begin
-  DECODE: entity work.decode_stage port map (                   
-  clk,              
-  reset,            
-  stop,             
-  branch,       
-  syllable_0,
-  add_0_0,
-  add_0_1,       
-  cont_0_0,         
-  cont_0_1,         
-  br_cont_0,
 
-  br_0_cont_s,
-  gr_add_w_s,        
+    DECODE: entity work.decode_stage port map 
+    (
 
-  gr_data_w_s,  
-  alu_oper_0_s   ,  
-  alu_oper_1_s   ,  
-  alu_immediate_s,  
-  exe_opc_s      ,  
-  alu_dest_s     ,  
-  gr_add_w_s,  
+        clk => clk, 
+        reset => reset,          
+        branch => branch,        
 
-  mem_dest_reg_s  , 
-  mem_store_d_s  ,  
+        syllable => syllable_0,       
 
-  mem_l_s_s      ,  
-  mem_add_s      ,
+        src_reg_add => add_src    
+        src_reg_cont => gr_src_cont,   
+        dst_reg_add => add_dst,    
+        dst_reg_cont => gr_dst_cont,   
 
-  gr_data_w_s,                                            
+        exe_operand_src => exe_operand_src_s, 
+        exe_syllable => exe_syllable_s,
+        exe_operand_dst => exe_operand_dst_s,
+        exe_immediate   => exe_immediate_s,
+        exe_opc         => exe_opc_s,       
+        exe_dest_reg    => exe_dest_reg_s,
+        exe_offset      => exe_offset_s,
 
-  br_exe_add_s   ,  
-  jump_add_s     ,  
-  br_0_cont_s   ,
+        dbus_addr_read => mem_read_addr,
 
+        exe_result => exe_forward_result,     
+        wb_reg_add => exe_forward_addr    
 
-  syllable_to_exe    
+    );
 
-);            
-EXECUTE: entity work.exe_stage_noctrl port map(         
-reset,            
-exe_opc_s,        
-syllable_to_exe,       
+    EXECUTE: entity work.execute_stage_noctrl port map
+    (
+        reset  => reset,           
+        syllable => exe_syllable,         
 
-alu_oper_0_s,     
-alu_oper_1_s,     
-alu_immediate_s,  
-alu_dest_s,       
+        exe_operand_src => exe_operand_src_s,  
+        exe_operand_dst => exe_operand_dst_s,
+        exe_immediate => exe_immediate_s,    
+        exe_opc => exe_opc_s,          
 
-mem_dest_reg_s,   
-mem_store_d_s,    
-mem_l_s_s,        
-mem_add_s,        
+        exe_dst_addr => exe_dest_reg_s,
+        exe_offset => exe_offset_s      
 
-br_exe_add_s,     
-jump_add_s,       
-br_0_cont_s,      
-mem_add_wrt,      
-mem_data_out,
-mem_wrt_amnt,     
-mem_data_in,      
-mem_w_e,          
+        exe_result => exe_out_result_s,
+        w_e_wb => w_e_wb,          
+        wb_reg_add => exe_out_dst_addr_s,         
 
-gr_add_w_s,         
-gr_data_w_s,        
-gr_w_e,           
+        mem_data_in => mem_data_in,      
+        mem_data_out => mem_data_out,     
+        mem_wrt_addr => mem_wrt_addr,
+        mem_wrt_en => mem_wrt_en      
 
-br_add_w,         
-br_data_w,        
-br_w_e
-                                                 );  
+    );
 
+    -- FORWARD
 
-                                                 gr_add_w <= gr_add_w_s;                                                                                            
-                                                 gr_data_w <= gr_data_w_s;
-                                                 mem_add_read <= mem_add_s;
+    exe_forward_result <= exe_out_result_s;
+    exe_forward_addr <= exe_out_dst_addr_s;
 
-                                               end Behavioral;
+    -- OUTPUTTING
+
+    exe_result <= exe_out_result_s;
+    wb_reg_add <= exe_out_dst_addr_s;
+
+end Behavioral;

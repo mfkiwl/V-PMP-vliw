@@ -21,6 +21,7 @@ entity decode_stage is
              dst_reg_add               : in std_logic_vector(3 downto 0);   -- from fetch stage
              dst_reg_cont              : in std_logic_vector(63 downto 0);  -- from GP register file
 
+             exe_syllable              : out std_logic_vector(63 downto 0); -- syllable to exe stage
              exe_operand_src           : out std_logic_vector(63 downto 0); -- SRC reg content
              exe_operand_dst           : out std_logic_vector(63 downto 0); -- DST reg content
              exe_immediate             : out std_logic_vector(31 downto 0); -- immediate in the instruction
@@ -58,6 +59,9 @@ begin
             exe_offset      <= (others => '0');
 
             if (reset = '0') then
+                
+                exe_syllable <= syllable;
+                
                 -- DECODING
 
                 if (wb_reg_add = dst_reg_add) then
