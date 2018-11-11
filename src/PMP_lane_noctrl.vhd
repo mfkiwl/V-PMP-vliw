@@ -61,7 +61,7 @@ begin
 
         syllable => syllable_0,       
 
-        src_reg_add => add_src    
+        src_reg_add => add_src ,  
         src_reg_cont => gr_src_cont,   
         dst_reg_add => add_dst,    
         dst_reg_cont => gr_dst_cont,   
@@ -81,10 +81,10 @@ begin
 
     );
 
-    EXECUTE: entity work.execute_stage_noctrl port map
+    EXECUTE: entity work.exe_stage_noctrl port map
     (
         reset  => reset,           
-        syllable => exe_syllable,         
+        syllable => exe_syllable_s,         
 
         exe_operand_src => exe_operand_src_s,  
         exe_operand_dst => exe_operand_dst_s,
@@ -92,7 +92,7 @@ begin
         exe_opc => exe_opc_s,          
 
         exe_dst_addr => exe_dest_reg_s,
-        exe_offset => exe_offset_s      
+        exe_offset => exe_offset_s ,     
 
         exe_result => exe_out_result_s,
         w_e_wb => w_e_wb,          
