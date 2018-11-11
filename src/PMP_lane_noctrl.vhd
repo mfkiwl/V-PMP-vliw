@@ -98,7 +98,7 @@ begin
   syllable_to_exe    
 
 );            
-EXECUTE: entity work.exe_stage_1_3 port map(         
+EXECUTE: entity work.exe_stage_noctrl port map(         
 reset,            
 exe_opc_s,        
 syllable_to_exe,       

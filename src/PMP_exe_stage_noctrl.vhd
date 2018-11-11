@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 -- WITH CONTROL UNIT
-entity exe_stage_complete is
+entity exe_stage_noctrl is
 
     Port (
 
@@ -25,15 +25,14 @@ entity exe_stage_complete is
              -- MEMORY INTERFACE
              mem_data_in      : in std_logic_vector (63 downto 0);
              mem_data_out     : out std_logic_vector (63 downto 0);
-             mem_read_addr    : out std_logic_vector (63 downto 0);
              mem_wrt_addr     : out std_logic_vector (63 downto 0);
              mem_wrt_en       : out std_logic
 
          );
 
-end exe_stage_complete;
+end exe_stage_noctrl;
 
-architecture Behavioral of exe_stage_complete is
+architecture Behavioral of exe_stage_noctrl is
 
     -- ALU32 SIGNALS
     signal alu32_gr_result_s : std_logic_vector(63 downto 0);
@@ -47,7 +46,6 @@ architecture Behavioral of exe_stage_complete is
 
     -- MEM SIGNALS
     signal mem_data_out_s     : std_logic_vector (63 downto 0);
-    signal mem_read_addr_s    : std_logic_vector (63 downto 0);
     signal mem_wrt_addr_s     : std_logic_vector (63 downto 0);
     signal mem_wrt_en_s       : std_logic;
     signal mem_gr_result_s    : std_logic_vector(63 downto 0);
@@ -107,7 +105,7 @@ begin
 
         mem_data_in => mem_data_in,
         mem_data_out => mem_data_out_s,
-        mem_read_addr => mem_read_addr_s,
+        mem_wrt_addr => mem_wrt_addr_s,
         mem_wrt_en => mem_wrt_en_s,
 
         gr_add_w => mem_gr_add_s,
@@ -149,10 +147,10 @@ begin
 
     mem_data_out <= mem_data_out_s when exe_opc = "10" else
                     (others => '0');
-    mem_read_addr <= mem_read_addr_s when exe_opc = "10" else
-                     (others = '0');
+    
     mem_wrt_addr <= mem_wrt_addr_s when exe_opc = "10" else
                     (others => '0');
+    
     mem_wrt_en <= mem_wrt_en_s when exe_opc = "10" else
                   '0';
 

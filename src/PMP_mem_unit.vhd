@@ -23,7 +23,6 @@ entity memory_unit is
              -- MEMORY INTERFACE
              mem_data_in      : in std_logic_vector (63 downto 0);
              mem_data_out     : out std_logic_vector (63 downto 0);
-             mem_read_addr     : out std_logic_vector (63 downto 0);
              mem_wrt_addr     : out std_logic_vector (63 downto 0);
              mem_wrt_en       : out std_logic;
              -- GPR INTERFACE
@@ -46,7 +45,6 @@ begin
     begin
 
         mem_data_out <= (others => '0');  
-        mem_read_addr <= (others => '0');     
         mem_wrt_addr <= (others => '0');     
         mem_wrt_en  <= '0';
         gr_add_w <= (others => '0');
@@ -63,35 +61,30 @@ begin
                     result_gr <= mem_data_in;
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
-                    mem_read_addr <= x"00000000" & immediate;
 
                 when LDXW_OPC => 
 
                     result_gr(31 downto 0) <= mem_data_in(31 downto 0);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
-                    mem_read_addr <= operand_dst + x"0000000000" & offset ;
 
                 when LDXH_OPC => 
 
                     result_gr(15 downto 0) <= mem_data_in(15 downto 0);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
-                    mem_read_addr <= operand_dst + x"0000000000" & offset ;
 
                 when LDXB_OPC => 
 
                     result_gr(7 downto 0) <= mem_data_in(7 downto 0);
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
-                    mem_read_addr <= operand_dst + x"0000000000" & offset ;
 
                 when LDXDW_OPC => 
 
                     result_gr <= mem_data_in;
                     gr_add_w <= gr_add_dst;
                     w_e_gr <= '1';
-                    mem_read_addr <= operand_dst + x"0000000000" & offset ;
 
                 -- STORE 
                 when STW_OPC   => 
@@ -146,7 +139,6 @@ begin
                 when others =>    
         
                     mem_data_out <= (others => '0');  
-                    mem_read_addr <= (others => '0');     
                     mem_wrt_addr <= (others => '0');     
                     mem_wrt_en  <= '0';
                     gr_add_w <= (others => '0');
