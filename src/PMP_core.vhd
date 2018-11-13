@@ -129,7 +129,7 @@ architecture Behavioral of PMP_core is
     signal w_e_3             : std_logic;
     signal cont_src_3        : std_logic_vector(63 downto 0);
     signal cont_dst_3_exe    : std_logic_vector(63 downto 0);
-    signal cont_dst_4_fetch  : std_logic_vector(63 downto 0);
+    signal cont_dst_3_fetch  : std_logic_vector(63 downto 0);
     signal gr_result_3       : std_logic_vector(63 downto 0);
 
     signal add_src_4         : std_logic_vector(3 downto 0);
@@ -173,7 +173,6 @@ architecture Behavioral of PMP_core is
     signal gr_result_7       : std_logic_vector(63 downto 0);
 
     -- PROGRAM COUNTER INTERFACE
-    signal program_counter   : std_logic_vector(15 downto 0);
     signal PC_new_addr       : std_logic_vector(15 downto 0);
     signal PC_increment      : std_logic;
     signal PC_add            : std_logic;
@@ -188,10 +187,10 @@ begin
     (
 
         clk  => clk,       
-        reset => reset_s     
-        instr => instruction_s,      
+        reset => reset_s ,    
+        instr => imem_instr,      
         start => start,     
-        stop => stop,      
+        stop => stop_s,      
         branch => branch,     
 
         syllable_0 => syllable_0_s, 
@@ -228,7 +227,7 @@ begin
 
     );  
 
-    PROGRAM_COUNTER: entity work.pc port map 
+    PROGRAM_CNT: entity work.pc port map 
     ( 
         clk => clk,        
         inc => PC_increment,      
@@ -239,7 +238,7 @@ begin
         pc_stop => PC_stop,
         pc_load => PC_load, 
 
-        PC => program_counter   
+        PC => imem_addr   
     );  
 
     GPR_FILE: entity work.gr_regfile port map 
@@ -309,7 +308,7 @@ begin
         w_e_7 => w_e_7,            
         cont_src_7 => cont_src_7,        
         cont_dst_7_exe => cont_dst_7_exe,    
-        cont_dst_7_fetch => cont_dst_7_exe, 
+        cont_dst_7_fetch => cont_dst_7_exe 
 
 
     );
@@ -319,7 +318,7 @@ begin
     (
 
         clk => clk,
-        reset => resset,
+        reset => reset,
         stop => stop_s,        
 
         syllable_0 =>  syllable_0_s,  

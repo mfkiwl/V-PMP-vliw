@@ -8,7 +8,7 @@ entity lane_noctrl is
              stop       : in std_logic;   
              branch     : in std_logic;
 
-             syllable_0 : in std_logic_vector(31 downto 0);
+             syllable : in std_logic_vector(31 downto 0);
 
              add_src     : in std_logic_vector(3 downto 0);
              add_dst     : in std_logic_vector(3 downto 0);
@@ -25,7 +25,8 @@ entity lane_noctrl is
              mem_data_out     : out std_logic_vector (63 downto 0);
              mem_read_addr    : out std_logic_vector (63 downto 0);
              mem_wrt_addr     : out std_logic_vector (63 downto 0);
-             mem_wrt_en       : out std_logic
+             mem_wrt_en       : out std_logic;
+             mem_wrt_amount   : out std_logic_vector(8 downto 0)
 
          );
 
@@ -59,7 +60,7 @@ begin
         reset => reset,          
         branch => branch,        
 
-        syllable => syllable_0,       
+        syllable => syllable,       
 
         src_reg_add => add_src ,  
         src_reg_cont => gr_src_cont,   

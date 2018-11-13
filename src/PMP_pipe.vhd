@@ -198,7 +198,7 @@ begin
         mem_read_addr => mem_add_read_0,     
         mem_wrt_addr  => mem_add_wrt_0,   
         mem_wrt_en  => mem_w_e_0,     
-        mem_wrt_amount => mem_wrt_amount_0,
+        mem_wrt_amount => mem_wrt_amnt_0,
 
         pc_addr => PC_addr,          
         pc_add => PC_add,              
@@ -215,7 +215,7 @@ begin
         stop  => stop_s,        
         branch => branch_s,     
 
-        syllable_1 => syllable_1,
+        syllable => syllable_1,
 
         add_src    => gr_add_1_s, 
         add_dst    => gr_add_1_d,
@@ -230,8 +230,8 @@ begin
         mem_data_out => mem_data_out_1,    
         mem_read_addr => mem_add_read_1,     
         mem_wrt_addr  => mem_add_wrt_1,   
-        mem_wrt_en  => mem_w_e_1     
-        mem_wrt_amount => mem_wrt_amount_1,
+        mem_wrt_en  => mem_w_e_1  ,   
+        mem_wrt_amount => mem_wrt_amnt_1
 
     );
 
@@ -244,7 +244,7 @@ begin
         stop  => stop_s,        
         branch => branch_s,     
 
-        syllable_2 => syllable_2,
+        syllable => syllable_2,
 
         add_src    => gr_add_2_s, 
         add_dst    => gr_add_2_d,
@@ -259,8 +259,8 @@ begin
         mem_data_out => mem_data_out_2,    
         mem_read_addr => mem_add_read_2,     
         mem_wrt_addr  => mem_add_wrt_2,   
-        mem_wrt_en  => mem_w_e_2     
-        mem_wrt_amount => mem_wrt_amount_2,
+        mem_wrt_en  => mem_w_e_2,     
+        mem_wrt_amount => mem_wrt_amnt_2
 
     );
 
@@ -272,7 +272,7 @@ begin
         stop  => stop_s,        
         branch => branch_s,     
 
-        syllable_3 => syllable_3,
+        syllable => syllable_3,
 
         add_src    => gr_add_3_s, 
         add_dst    => gr_add_3_d,
@@ -287,8 +287,8 @@ begin
         mem_data_out => mem_data_out_3,    
         mem_read_addr => mem_add_read_3,     
         mem_wrt_addr  => mem_add_wrt_3,   
-        mem_wrt_en  => mem_w_e_3     
-        mem_wrt_amount => mem_wrt_amount_3,
+        mem_wrt_en  => mem_w_e_3 ,    
+        mem_wrt_amount => mem_wrt_amnt_3
 
     );
 
@@ -300,7 +300,7 @@ begin
         stop  => stop_s,        
         branch => branch_s,     
 
-        syllable_4 => syllable_1,
+        syllable => syllable_1,
 
         add_src    => gr_add_4_s, 
         add_dst    => gr_add_4_d,
@@ -315,8 +315,8 @@ begin
         mem_data_out => mem_data_out_4,    
         mem_read_addr => mem_add_read_4,     
         mem_wrt_addr  => mem_add_wrt_4,   
-        mem_wrt_en  => mem_w_e_4     
-        mem_wrt_amount => mem_wrt_amount_4,
+        mem_wrt_en  => mem_w_e_4 ,    
+        mem_wrt_amount => mem_wrt_amnt_4
 
     );
 
@@ -328,7 +328,7 @@ begin
         stop  => stop_s,        
         branch => branch_s,     
 
-        syllable_5 => syllable_1,
+        syllable => syllable_1,
 
         add_src    => gr_add_5_s, 
         add_dst    => gr_add_5_d,
@@ -343,8 +343,8 @@ begin
         mem_data_out => mem_data_out_5,    
         mem_read_addr => mem_add_read_5,     
         mem_wrt_addr  => mem_add_wrt_5,   
-        mem_wrt_en  => mem_w_e_5     
-        mem_wrt_amount => mem_wrt_amount_5,
+        mem_wrt_en  => mem_w_e_5  ,   
+        mem_wrt_amount => mem_wrt_amnt_5
 
     );
 
@@ -356,7 +356,7 @@ begin
         stop  => stop_s,        
         branch => branch_s,     
 
-        syllable_6 => syllable_1,
+        syllable => syllable_1,
 
         add_src    => gr_add_6_s, 
         add_dst    => gr_add_6_d,
@@ -371,8 +371,8 @@ begin
         mem_data_out => mem_data_out_6,    
         mem_read_addr => mem_add_read_6,     
         mem_wrt_addr  => mem_add_wrt_6,   
-        mem_wrt_en  => mem_w_e_6     
-        mem_wrt_amount => mem_wrt_amount_6,
+        mem_wrt_en  => mem_w_e_6 ,    
+        mem_wrt_amount => mem_wrt_amnt_6
 
     );
 
@@ -384,7 +384,7 @@ begin
         stop  => stop_s,        
         branch => branch_s,     
 
-        syllable_7 => syllable_1,
+        syllable => syllable_1,
 
         add_src    => gr_add_7_s, 
         add_dst    => gr_add_7_d,
@@ -399,8 +399,8 @@ begin
         mem_data_out => mem_data_out_7,    
         mem_read_addr => mem_add_read_7,     
         mem_wrt_addr  => mem_add_wrt_7,   
-        mem_wrt_en  => mem_w_e_7     
-        mem_wrt_amount => mem_wrt_amount_7,
+        mem_wrt_en  => mem_w_e_7 ,    
+        mem_wrt_amount => mem_wrt_amnt_7
 
     );
 
