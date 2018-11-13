@@ -26,6 +26,7 @@ entity exe_stage_complete is
              mem_data_out     : out std_logic_vector (63 downto 0);
              mem_wrt_addr     : out std_logic_vector (63 downto 0);
              mem_wrt_en       : out std_logic;
+             mem_wrt_amount   : out std_logic_vector(8 downto 0);
 
              -- PROGRAM COUNTER INTERFACE
              pc_addr          : out std_logic_vector(15 downto 0); -- branch address from control unit
@@ -120,6 +121,7 @@ begin
         mem_data_out => mem_data_out_s,
         mem_wrt_addr => mem_wrt_addr_s,
         mem_wrt_en => mem_wrt_en_s,
+        mem_wrt_amount => mem_wrt_amount,
 
         gr_add_w => mem_gr_add_s,
         w_e_gr => mem_gr_w_e_s,

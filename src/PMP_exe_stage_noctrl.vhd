@@ -25,9 +25,10 @@ entity exe_stage_noctrl is
              mem_data_in      : in std_logic_vector (63 downto 0);
              mem_data_out     : out std_logic_vector (63 downto 0);
              mem_wrt_addr     : out std_logic_vector (63 downto 0);
-             mem_wrt_en       : out std_logic
+             mem_wrt_en       : out std_logic;
+             mem_wrt_amount   : out std_logic_vector(8 downto 0)
 
-         );
+);
 
 end exe_stage_noctrl;
 
@@ -106,6 +107,7 @@ begin
         mem_data_out => mem_data_out_s,
         mem_wrt_addr => mem_wrt_addr_s,
         mem_wrt_en => mem_wrt_en_s,
+        mem_wrt_amount => mem_wrt_amount,
 
         gr_add_w => mem_gr_add_s,
         w_e_gr => mem_gr_w_e_s,
@@ -146,10 +148,10 @@ begin
 
     mem_data_out <= mem_data_out_s when exe_opc = "10" else
                     (others => '0');
-    
+
     mem_wrt_addr <= mem_wrt_addr_s when exe_opc = "10" else
                     (others => '0');
-    
+
     mem_wrt_en <= mem_wrt_en_s when exe_opc = "10" else
                   '0';
 

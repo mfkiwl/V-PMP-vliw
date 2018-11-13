@@ -103,56 +103,56 @@ entity lanes is
              mem_add_wrt_0  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_0 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_0 : out std_logic_vector(63 downto 0); -- data to write to memory
-             --mem_wrt_amnt_0 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_0 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
              mem_data_in_0  : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_0      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_1  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_1 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_1 : out std_logic_vector(63 downto 0); -- data to write to memory
-             --mem_wrt_amnt_1 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_1 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
              mem_data_in_1  : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_1      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_2  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_2 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_2 : out std_logic_vector(63 downto 0); -- data to write to memory
-             --mem_wrt_amnt_2 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_2 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
              mem_data_in_2 : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_2      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_3  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_3 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_3 : out std_logic_vector(63 downto 0); -- data to write to memory
-             --mem_wrt_amnt_3 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_3 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
              mem_data_in_3  : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_3      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_4  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_4 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_4 : out std_logic_vector(63 downto 0); -- data to write to memory
-             --mem_wrt_amnt_4 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_4 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
              mem_data_in_4 : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_4      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_5  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_5 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_5 : out std_logic_vector(63 downto 0); -- data to write to memory
-             --mem_wrt_amnt_5 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_5 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
              mem_data_in_5  : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_5      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_6  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_6 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_6 : out std_logic_vector(63 downto 0); -- data to write to memory
-             --mem_wrt_amnt_6 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_6 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
              mem_data_in_6 : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_6      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_7  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_7 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_7 : out std_logic_vector(63 downto 0); -- data to write to memory
-             --mem_wrt_amnt_7 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_7 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
              mem_data_in_7  : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_7      : out std_logic;                     -- memory write enable
 
@@ -198,6 +198,7 @@ begin
         mem_read_addr => mem_add_read_0,     
         mem_wrt_addr  => mem_add_wrt_0,   
         mem_wrt_en  => mem_w_e_0,     
+        mem_wrt_amount => mem_wrt_amount_0,
 
         pc_addr => PC_addr,          
         pc_add => PC_add,              
@@ -230,6 +231,7 @@ begin
         mem_read_addr => mem_add_read_1,     
         mem_wrt_addr  => mem_add_wrt_1,   
         mem_wrt_en  => mem_w_e_1     
+        mem_wrt_amount => mem_wrt_amount_1,
 
     );
 
@@ -258,9 +260,10 @@ begin
         mem_read_addr => mem_add_read_2,     
         mem_wrt_addr  => mem_add_wrt_2,   
         mem_wrt_en  => mem_w_e_2     
+        mem_wrt_amount => mem_wrt_amount_2,
 
     );
-    
+
     LANE_3: entity work.lane_noctrl port map 
     (
 
@@ -285,6 +288,7 @@ begin
         mem_read_addr => mem_add_read_3,     
         mem_wrt_addr  => mem_add_wrt_3,   
         mem_wrt_en  => mem_w_e_3     
+        mem_wrt_amount => mem_wrt_amount_3,
 
     );
 
@@ -312,6 +316,7 @@ begin
         mem_read_addr => mem_add_read_4,     
         mem_wrt_addr  => mem_add_wrt_4,   
         mem_wrt_en  => mem_w_e_4     
+        mem_wrt_amount => mem_wrt_amount_4,
 
     );
 
@@ -339,6 +344,7 @@ begin
         mem_read_addr => mem_add_read_5,     
         mem_wrt_addr  => mem_add_wrt_5,   
         mem_wrt_en  => mem_w_e_5     
+        mem_wrt_amount => mem_wrt_amount_5,
 
     );
 
@@ -366,6 +372,7 @@ begin
         mem_read_addr => mem_add_read_6,     
         mem_wrt_addr  => mem_add_wrt_6,   
         mem_wrt_en  => mem_w_e_6     
+        mem_wrt_amount => mem_wrt_amount_6,
 
     );
 
@@ -393,6 +400,7 @@ begin
         mem_read_addr => mem_add_read_7,     
         mem_wrt_addr  => mem_add_wrt_7,   
         mem_wrt_en  => mem_w_e_7     
+        mem_wrt_amount => mem_wrt_amount_7,
 
     );
 

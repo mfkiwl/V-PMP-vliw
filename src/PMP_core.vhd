@@ -31,14 +31,14 @@ entity PMP_core is
              dbus_data_out_6 : out std_logic_vector(63 downto 0);
              dbus_data_out_7 : out std_logic_vector(63 downto 0);
 
-             --dbus_data_amnt_0 : out std_logic_vector(4 downto 0);
-             --dbus_data_amnt_1 : out std_logic_vector(4 downto 0);
-             --dbus_data_amnt_2 : out std_logic_vector(4 downto 0);
-             --dbus_data_amnt_3 : out std_logic_vector(4 downto 0);
-             --dbus_data_amnt_4 : out std_logic_vector(4 downto 0);
-             --dbus_data_amnt_5 : out std_logic_vector(4 downto 0);
-             --dbus_data_amnt_6 : out std_logic_vector(4 downto 0);
-             --dbus_data_amnt_7 : out std_logic_vector(4 downto 0);  
+             dbus_data_amnt_0 : out std_logic_vector(8 downto 0);
+             dbus_data_amnt_1 : out std_logic_vector(8 downto 0);
+             dbus_data_amnt_2 : out std_logic_vector(8 downto 0);
+             dbus_data_amnt_3 : out std_logic_vector(8 downto 0);
+             dbus_data_amnt_4 : out std_logic_vector(8 downto 0);
+             dbus_data_amnt_5 : out std_logic_vector(8 downto 0);
+             dbus_data_amnt_6 : out std_logic_vector(8 downto 0);
+             dbus_data_amnt_7 : out std_logic_vector(8 downto 0);  
 
              dbus_addr_read_0    : out std_logic_vector(63 downto 0);
              dbus_addr_read_1    : out std_logic_vector(63 downto 0);
@@ -409,59 +409,58 @@ begin
         mem_add_wrt_0 => dbus_addr_wrt_0, 
         mem_add_read_0 => dbus_addr_read_0,
         mem_data_out_0 => dbus_data_out_0,
-        --mem_wrt_amnt_0 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+        mem_wrt_amnt_0 => dbus_data_amnt_0,
         mem_data_in_0 => dbus_data_in_0, 
         mem_w_e_0 => dbus_wrt_en_0,     
 
         mem_add_wrt_1 => dbus_addr_wrt_1, 
         mem_add_read_1 => dbus_addr_read_1,
         mem_data_out_1 => dbus_data_out_1,
-        --mem_wrt_amnt_1 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+        mem_wrt_amnt_1 => dbus_data_amnt_1,
         mem_data_in_1 => dbus_data_in_1, 
         mem_w_e_1 => dbus_wrt_en_1,     
 
         mem_add_wrt_2 => dbus_addr_wrt_2, 
         mem_add_read_2 => dbus_addr_read_2,
         mem_data_out_2 => dbus_data_out_2,
-        --mem_wrt_amnt_2 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+        mem_wrt_amnt_2 => dbus_data_amnt_2,
         mem_data_in_2 => dbus_data_in_2, 
         mem_w_e_2 => dbus_wrt_en_2,     
 
         mem_add_wrt_3 => dbus_addr_wrt_3, 
         mem_add_read_3 => dbus_addr_read_3,
         mem_data_out_3 => dbus_data_out_3,
-        --mem_wrt_amnt_3 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+        mem_wrt_amnt_3 => dbus_data_amnt_3,
         mem_data_in_3 => dbus_data_in_3, 
         mem_w_e_3 => dbus_wrt_en_3,     
 
         mem_add_wrt_4 => dbus_addr_wrt_4, 
         mem_add_read_4 => dbus_addr_read_4,
         mem_data_out_4 => dbus_data_out_4,
-        --mem_wrt_amnt_4 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+        mem_wrt_amnt_4 => dbus_data_amnt_4,
         mem_data_in_4 => dbus_data_in_4, 
         mem_w_e_4 => dbus_wrt_en_4,     
 
         mem_add_wrt_5 => dbus_addr_wrt_5, 
         mem_add_read_5 => dbus_addr_read_5,
         mem_data_out_5 => dbus_data_out_5,
-        --mem_wrt_amnt_5 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+        mem_wrt_amnt_5 => dbus_data_amnt_5,
         mem_data_in_5 => dbus_data_in_5, 
         mem_w_e_5 => dbus_wrt_en_5,     
 
         mem_add_wrt_6 => dbus_addr_wrt_6, 
         mem_add_read_6 => dbus_addr_read_6,
         mem_data_out_6 => dbus_data_out_6,
-        --mem_wrt_amnt_6 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+        mem_wrt_amnt_6 => dbus_data_amnt_6,
         mem_data_in_6 => dbus_data_in_6, 
         mem_w_e_6 => dbus_wrt_en_6,     
 
         mem_add_wrt_7 => dbus_addr_wrt_7, 
         mem_add_read_7 => dbus_addr_read_7,
         mem_data_out_7 => dbus_data_out_7,
-        --mem_wrt_amnt_7 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
+        mem_wrt_amnt_7 => dbus_data_amnt_7,
         mem_data_in_7 => dbus_data_in_7, 
         mem_w_e_7 => dbus_wrt_en_7,     
-
 
         -- PROGRAM COUNTER INTERFACE
 
