@@ -322,7 +322,6 @@ begin
         reset => resset,
         stop => stop_s,        
 
-        -- SYLLABLES FROM FETCH STAGE
         syllable_0 =>  syllable_0_s,  
         syllable_1 =>  syllable_1_s,
         syllable_2 =>  syllable_2_s,
@@ -332,7 +331,6 @@ begin
         syllable_6 =>  syllable_6_s,
         syllable_7 =>  syllable_7_s,
 
-        -- OPERANDS FROM GPR PREFETCHED
         gr_0_src => cont_src_0,
         gr_0_dst => cont_dst_0_fetch,
 
@@ -408,68 +406,69 @@ begin
         gr_wrt_en_6 => w_e_6,
         gr_wrt_en_7 => w_e_7,
 
-        mem_add_wrt_0  : out std_logic_vector(63 downto 0); -- write address for memory
-        mem_add_read_0 : out std_logic_vector(63 downto 0); -- read address for memory
-        mem_data_out_0 : out std_logic_vector(63 downto 0); -- data to write to memory
+        mem_add_wrt_0 => dbus_addr_wrt_0, 
+        mem_add_read_0 => dbus_addr_read_0,
+        mem_data_out_0 => dbus_data_out_0,
         --mem_wrt_amnt_0 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
-        mem_data_in_0  : in std_logic_vector(63 downto 0);  -- Data from memory
-        mem_w_e_0      : out std_logic;                     -- memory write enable
+        mem_data_in_0 => dbus_data_in_0, 
+        mem_w_e_0 => dbus_wrt_en_0,     
 
-        mem_add_wrt_1  : out std_logic_vector(63 downto 0); -- write address for memory
-        mem_add_read_1 : out std_logic_vector(63 downto 0); -- read address for memory
-        mem_data_out_1 : out std_logic_vector(63 downto 0); -- data to write to memory
+        mem_add_wrt_1 => dbus_addr_wrt_1, 
+        mem_add_read_1 => dbus_addr_read_1,
+        mem_data_out_1 => dbus_data_out_1,
         --mem_wrt_amnt_1 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
-        mem_data_in_1  : in std_logic_vector(63 downto 0);  -- Data from memory
-        mem_w_e_1      : out std_logic;                     -- memory write enable
+        mem_data_in_1 => dbus_data_in_1, 
+        mem_w_e_1 => dbus_wrt_en_1,     
 
-        mem_add_wrt_2  : out std_logic_vector(63 downto 0); -- write address for memory
-        mem_add_read_2 : out std_logic_vector(63 downto 0); -- read address for memory
-        mem_data_out_2 : out std_logic_vector(63 downto 0); -- data to write to memory
+        mem_add_wrt_2 => dbus_addr_wrt_2, 
+        mem_add_read_2 => dbus_addr_read_2,
+        mem_data_out_2 => dbus_data_out_2,
         --mem_wrt_amnt_2 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
-        mem_data_in_2 : in std_logic_vector(63 downto 0);  -- Data from memory
-        mem_w_e_2      : out std_logic;                     -- memory write enable
+        mem_data_in_2 => dbus_data_in_2, 
+        mem_w_e_2 => dbus_wrt_en_2,     
 
-        mem_add_wrt_3  : out std_logic_vector(63 downto 0); -- write address for memory
-        mem_add_read_3 : out std_logic_vector(63 downto 0); -- read address for memory
-        mem_data_out_3 : out std_logic_vector(63 downto 0); -- data to write to memory
+        mem_add_wrt_3 => dbus_addr_wrt_3, 
+        mem_add_read_3 => dbus_addr_read_3,
+        mem_data_out_3 => dbus_data_out_3,
         --mem_wrt_amnt_3 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
-        mem_data_in_3  : in std_logic_vector(63 downto 0);  -- Data from memory
-        mem_w_e_3      : out std_logic;                     -- memory write enable
+        mem_data_in_3 => dbus_data_in_3, 
+        mem_w_e_3 => dbus_wrt_en_3,     
 
-        mem_add_wrt_4  : out std_logic_vector(63 downto 0); -- write address for memory
-        mem_add_read_4 : out std_logic_vector(63 downto 0); -- read address for memory
-        mem_data_out_4 : out std_logic_vector(63 downto 0); -- data to write to memory
+        mem_add_wrt_4 => dbus_addr_wrt_4, 
+        mem_add_read_4 => dbus_addr_read_4,
+        mem_data_out_4 => dbus_data_out_4,
         --mem_wrt_amnt_4 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
-        mem_data_in_4 : in std_logic_vector(63 downto 0);  -- Data from memory
-        mem_w_e_4      : out std_logic;                     -- memory write enable
+        mem_data_in_4 => dbus_data_in_4, 
+        mem_w_e_4 => dbus_wrt_en_4,     
 
-        mem_add_wrt_5  : out std_logic_vector(63 downto 0); -- write address for memory
-        mem_add_read_5 : out std_logic_vector(63 downto 0); -- read address for memory
-        mem_data_out_5 : out std_logic_vector(63 downto 0); -- data to write to memory
+        mem_add_wrt_5 => dbus_addr_wrt_5, 
+        mem_add_read_5 => dbus_addr_read_5,
+        mem_data_out_5 => dbus_data_out_5,
         --mem_wrt_amnt_5 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
-        mem_data_in_5  : in std_logic_vector(63 downto 0);  -- Data from memory
-        mem_w_e_5      : out std_logic;                     -- memory write enable
+        mem_data_in_5 => dbus_data_in_5, 
+        mem_w_e_5 => dbus_wrt_en_5,     
 
-        mem_add_wrt_6  : out std_logic_vector(63 downto 0); -- write address for memory
-        mem_add_read_6 : out std_logic_vector(63 downto 0); -- read address for memory
-        mem_data_out_6 : out std_logic_vector(63 downto 0); -- data to write to memory
+        mem_add_wrt_6 => dbus_addr_wrt_6, 
+        mem_add_read_6 => dbus_addr_read_6,
+        mem_data_out_6 => dbus_data_out_6,
         --mem_wrt_amnt_6 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
-        mem_data_in_6 : in std_logic_vector(63 downto 0);  -- Data from memory
-        mem_w_e_6      : out std_logic;                     -- memory write enable
+        mem_data_in_6 => dbus_data_in_6, 
+        mem_w_e_6 => dbus_wrt_en_6,     
 
-        mem_add_wrt_7  : out std_logic_vector(63 downto 0); -- write address for memory
-        mem_add_read_7 : out std_logic_vector(63 downto 0); -- read address for memory
-        mem_data_out_7 : out std_logic_vector(63 downto 0); -- data to write to memory
+        mem_add_wrt_7 => dbus_addr_wrt_7, 
+        mem_add_read_7 => dbus_addr_read_7,
+        mem_data_out_7 => dbus_data_out_7,
         --mem_wrt_amnt_7 : out std_logic_vector(4 downto 0);  -- number of bits written to memory
-        mem_data_in_7  : in std_logic_vector(63 downto 0);  -- Data from memory
-        mem_w_e_7      : out std_logic;                     -- memory write enable
+        mem_data_in_7 => dbus_data_in_7, 
+        mem_w_e_7 => dbus_wrt_en_7,     
+
 
         -- PROGRAM COUNTER INTERFACE
 
-        PC_addr          : out std_logic_vector(15 downto 0); --address to add to PC
-        PC_add           : out std_logic;
-        PC_stop          : out std_logic;
-        PC_load          : out std_logic
+        PC_addr => PC_new_addr, 
+        PC_add  => PC_add,
+        PC_stop => PC_stop,
+        PC_load => PC_load
 
     );
 
