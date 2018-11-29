@@ -50,7 +50,9 @@ begin
     begin
 
         if rising_edge(clk) then
-
+          
+            if (reset = '1') then
+            
             exe_operand_src <= (others => '0'); 
             exe_operand_dst <= (others => '0'); 
             exe_immediate   <= (others => '0');
@@ -58,7 +60,7 @@ begin
             exe_dest_reg    <= (others => '0');
             exe_offset      <= (others => '0');
 
-            if (reset = '0') then
+            else 
                 
                 exe_syllable <= syllable;
                 

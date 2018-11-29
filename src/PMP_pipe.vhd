@@ -103,56 +103,56 @@ entity lanes is
              mem_add_wrt_0  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_0 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_0 : out std_logic_vector(63 downto 0); -- data to write to memory
-             mem_wrt_amnt_0 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_0 : out std_logic_vector(15 downto 0);  -- number of bits written to memory
              mem_data_in_0  : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_0      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_1  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_1 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_1 : out std_logic_vector(63 downto 0); -- data to write to memory
-             mem_wrt_amnt_1 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_1 : out std_logic_vector(15 downto 0);  -- number of bits written to memory
              mem_data_in_1  : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_1      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_2  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_2 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_2 : out std_logic_vector(63 downto 0); -- data to write to memory
-             mem_wrt_amnt_2 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_2 : out std_logic_vector(15 downto 0);  -- number of bits written to memory
              mem_data_in_2 : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_2      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_3  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_3 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_3 : out std_logic_vector(63 downto 0); -- data to write to memory
-             mem_wrt_amnt_3 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_3 : out std_logic_vector(15 downto 0);  -- number of bits written to memory
              mem_data_in_3  : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_3      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_4  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_4 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_4 : out std_logic_vector(63 downto 0); -- data to write to memory
-             mem_wrt_amnt_4 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_4 : out std_logic_vector(15 downto 0);  -- number of bits written to memory
              mem_data_in_4 : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_4      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_5  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_5 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_5 : out std_logic_vector(63 downto 0); -- data to write to memory
-             mem_wrt_amnt_5 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_5 : out std_logic_vector(15 downto 0);  -- number of bits written to memory
              mem_data_in_5  : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_5      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_6  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_6 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_6 : out std_logic_vector(63 downto 0); -- data to write to memory
-             mem_wrt_amnt_6 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_6 : out std_logic_vector(15 downto 0);  -- number of bits written to memory
              mem_data_in_6 : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_6      : out std_logic;                     -- memory write enable
 
              mem_add_wrt_7  : out std_logic_vector(63 downto 0); -- write address for memory
              mem_add_read_7 : out std_logic_vector(63 downto 0); -- read address for memory
              mem_data_out_7 : out std_logic_vector(63 downto 0); -- data to write to memory
-             mem_wrt_amnt_7 : out std_logic_vector(8 downto 0);  -- number of bits written to memory
+             mem_wrt_amnt_7 : out std_logic_vector(15 downto 0);  -- number of bits written to memory
              mem_data_in_7  : in std_logic_vector(63 downto 0);  -- Data from memory
              mem_w_e_7      : out std_logic;                     -- memory write enable
 
@@ -300,7 +300,7 @@ begin
         stop  => stop_s,        
         branch => branch_s,     
 
-        syllable => syllable_1,
+        syllable => syllable_4,
 
         add_src    => gr_add_4_s, 
         add_dst    => gr_add_4_d,
@@ -328,7 +328,7 @@ begin
         stop  => stop_s,        
         branch => branch_s,     
 
-        syllable => syllable_1,
+        syllable => syllable_5,
 
         add_src    => gr_add_5_s, 
         add_dst    => gr_add_5_d,
@@ -356,7 +356,7 @@ begin
         stop  => stop_s,        
         branch => branch_s,     
 
-        syllable => syllable_1,
+        syllable => syllable_6,
 
         add_src    => gr_add_6_s, 
         add_dst    => gr_add_6_d,
@@ -384,7 +384,7 @@ begin
         stop  => stop_s,        
         branch => branch_s,     
 
-        syllable => syllable_1,
+        syllable => syllable_7,
 
         add_src    => gr_add_7_s, 
         add_dst    => gr_add_7_d,

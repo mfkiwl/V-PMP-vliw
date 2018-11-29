@@ -12,7 +12,7 @@ entity control is
     Port ( 
              ctrl_select     : in std_logic; 
 
-             syllable         : in std_logic_vector(31 downto 0);
+             syllable         : in std_logic_vector(63 downto 0);
              operand_src      : in std_logic_vector(63 downto 0);
              operand_dst      : in std_logic_vector(63 downto 0);
              immediate        : in std_logic_vector(31 downto 0);

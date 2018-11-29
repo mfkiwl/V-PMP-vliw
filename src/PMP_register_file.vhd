@@ -149,45 +149,45 @@ begin
 
                     reg_file(conv_integer(add_dst_0_exe)) <= cont_dst_0_exe;
 
-                end if;
+                --end if;
 
-                if (w_e_1 = '1') then
+                elsif (w_e_1 = '1') then
 
                     reg_file(conv_integer(add_dst_1_exe)) <= cont_dst_1_exe;
 
-                end if;
+                --end if;
 
-                if (w_e_2 = '1') then
+                elsif (w_e_2 = '1') then
 
                     reg_file(conv_integer(add_dst_2_exe)) <= cont_dst_2_exe;
 
-                end if;
+                --end if;
 
-                if (w_e_3 = '1') then
+                elsif (w_e_3 = '1') then
 
                     reg_file(conv_integer(add_dst_3_exe)) <= cont_dst_3_exe;
 
-                end if;
+                --end if;
 
-                if (w_e_4 = '1') then
+                elsif (w_e_4 = '1') then
 
                     reg_file(conv_integer(add_dst_4_exe)) <= cont_dst_4_exe;
 
-                end if;
+                --end if;
 
-                if (w_e_5 = '1') then
+                elsif (w_e_5 = '1') then
 
                     reg_file(conv_integer(add_dst_5_exe)) <= cont_dst_5_exe;
 
-                end if;
+                --end if;
 
-                if (w_e_6 = '1') then
+                elsif (w_e_6 = '1') then
 
                     reg_file(conv_integer(add_dst_6_exe)) <= cont_dst_6_exe;
 
-                end if;
+                --end if;
 
-                if (w_e_7 = '1') then
+                elsif (w_e_7 = '1') then
 
                     reg_file(conv_integer(add_dst_7_exe)) <= cont_dst_7_exe;
 

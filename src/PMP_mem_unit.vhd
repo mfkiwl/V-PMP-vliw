@@ -25,7 +25,7 @@ entity memory_unit is
              mem_data_out     : out std_logic_vector (63 downto 0);
              mem_wrt_addr     : out std_logic_vector (63 downto 0);
              mem_wrt_en       : out std_logic;
-             mem_wrt_amount   : out std_logic_vector(8 downto 0);
+             mem_wrt_amount   : out std_logic_vector(15 downto 0);
 
              -- GPR INTERFACE
              gr_add_w         : out std_logic_vector(3 downto 0);
@@ -46,15 +46,21 @@ begin
     RAM_MEMORY : process (opc, mem_select, operand_src, operand_dst, immediate, gr_add_dst, reset)
     begin
 
-        mem_data_out <= (others => '0');  
-        mem_wrt_addr <= (others => '0');     
-        mem_wrt_en  <= '0';
-        gr_add_w <= (others => '0');
-        w_e_gr <= '0';
-        result_gr <= (others => '0');
-        mem_wrt_amount <= (others => '0');
+    if (reset ='1') then
+    
+    mem_data_out <= (others => '0');  
+    mem_wrt_addr <= (others => '0');     
+    mem_wrt_en  <= '0';
+    gr_add_w <= (others => '0');
+    w_e_gr <= '0';
+    result_gr <= (others => '0');
+    mem_wrt_amount <= (others => '0');
+   
+   else
 
-        if (mem_select = '1') and (reset = '0') then
+        if (mem_select = '1') then--and (reset = '0') then
+          
+          else
 
             case opc is
 
@@ -93,57 +99,56 @@ begin
                 when STW_OPC   => 
 
                     mem_data_out(31 downto 0) <= immediate;
-                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_addr <= operand_dst + offset;
                     mem_wrt_en <= '1';
                     mem_wrt_amount <= x"0100";
-
 
                 when STH_OPC   => 
 
                     mem_data_out(15 downto 0) <= immediate(15 downto 0);
-                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_addr <= operand_dst +  offset;
                     mem_wrt_en <= '1';
                     mem_wrt_amount <= x"0080";
 
                 when STB_OPC   =>
 
                     mem_data_out(7 downto 0) <= immediate(7 downto 0);
-                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_addr <= operand_dst + offset;
                     mem_wrt_en <= '1';
                     mem_wrt_amount <= x"0008";
 
                 when STDW_OPC  =>
 
                     mem_data_out <= x"00000000" & immediate;
-                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_addr <= operand_dst + offset;
                     mem_wrt_en <= '1';
                     mem_wrt_amount <= x"0200";
 
                 when STXW_OPC  => 
 
                     mem_data_out(31 downto 0) <= operand_src(31 downto 0);
-                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_addr <= operand_dst + offset;
                     mem_wrt_en <= '1';
                     mem_wrt_amount <= x"0100";
 
                 when STXH_OPC  => 
 
                     mem_data_out(15 downto 0) <= operand_src(15 downto 0);
-                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_addr <= operand_dst +  offset;
                     mem_wrt_en <= '1';
                     mem_wrt_amount <= x"0080";
 
                 when STXB_OPC  => 
 
                     mem_data_out(7 downto 0) <= operand_src(7 downto 0);
-                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_addr <= operand_dst + offset;
                     mem_wrt_en <= '1';
                     mem_wrt_amount <= x"0008";
 
                 when STXDW_OPC => 
 
                     mem_data_out <= operand_src;
-                    mem_wrt_addr <= operand_dst + x"0000000000" & offset;
+                    mem_wrt_addr <= operand_dst + offset;
                     mem_wrt_en <= '1';
                     mem_wrt_amount <= x"0200";
 
@@ -158,8 +163,8 @@ begin
                     result_gr <= (others => '0');
 
             end case;
-
-        end if;
+            end if;
+   end if;
     --when LDABSW_OPC =>      SEE KERNEL DOCUMENTATION                                                     
     --            when LDABSH_OPC =>                                                            
     --            when LDABSB_OPC =>                                                           

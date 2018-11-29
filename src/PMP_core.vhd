@@ -8,7 +8,7 @@ entity PMP_core is
              reset         : in std_logic;
              start         : in std_logic;
              -- Instruction Memory Interface
-             imem_addr     : out std_logic_vector(7 downto 0);
+             imem_addr     : out std_logic_vector(15 downto 0);
              imem_instr    : in std_logic_vector(511 downto 0);            
 
              -- Data Bus Interface
@@ -31,14 +31,14 @@ entity PMP_core is
              dbus_data_out_6 : out std_logic_vector(63 downto 0);
              dbus_data_out_7 : out std_logic_vector(63 downto 0);
 
-             dbus_data_amnt_0 : out std_logic_vector(8 downto 0);
-             dbus_data_amnt_1 : out std_logic_vector(8 downto 0);
-             dbus_data_amnt_2 : out std_logic_vector(8 downto 0);
-             dbus_data_amnt_3 : out std_logic_vector(8 downto 0);
-             dbus_data_amnt_4 : out std_logic_vector(8 downto 0);
-             dbus_data_amnt_5 : out std_logic_vector(8 downto 0);
-             dbus_data_amnt_6 : out std_logic_vector(8 downto 0);
-             dbus_data_amnt_7 : out std_logic_vector(8 downto 0);  
+             dbus_data_amnt_0 : out std_logic_vector(15 downto 0);
+             dbus_data_amnt_1 : out std_logic_vector(15 downto 0);
+             dbus_data_amnt_2 : out std_logic_vector(15 downto 0);
+             dbus_data_amnt_3 : out std_logic_vector(15 downto 0);
+             dbus_data_amnt_4 : out std_logic_vector(15 downto 0);
+             dbus_data_amnt_5 : out std_logic_vector(15 downto 0);
+             dbus_data_amnt_6 : out std_logic_vector(15 downto 0);
+             dbus_data_amnt_7 : out std_logic_vector(15 downto 0);  
 
              dbus_addr_read_0    : out std_logic_vector(63 downto 0);
              dbus_addr_read_1    : out std_logic_vector(63 downto 0);
@@ -252,7 +252,7 @@ begin
         w_e_0 => w_e_0,            
         cont_src_0 => cont_src_0,        
         cont_dst_0_exe => cont_dst_0_exe,    
-        cont_dst_0_fetch => cont_dst_0_exe, 
+        cont_dst_0_fetch => cont_dst_0_fetch, 
 
         add_src_1 => add_src_1,          
         add_dst_1_exe => add_dst_1_exe,    
@@ -260,7 +260,7 @@ begin
         w_e_1 => w_e_1,            
         cont_src_1 => cont_src_1,        
         cont_dst_1_exe => cont_dst_1_exe,    
-        cont_dst_1_fetch => cont_dst_1_exe, 
+        cont_dst_1_fetch => cont_dst_1_fetch, 
 
         add_src_2 => add_src_2,          
         add_dst_2_exe => add_dst_2_exe,    
@@ -268,7 +268,7 @@ begin
         w_e_2 => w_e_2,            
         cont_src_2 => cont_src_2,        
         cont_dst_2_exe => cont_dst_2_exe,    
-        cont_dst_2_fetch => cont_dst_2_exe, 
+        cont_dst_2_fetch => cont_dst_2_fetch, 
 
         add_src_3 => add_src_3,          
         add_dst_3_exe => add_dst_3_exe,    
@@ -276,7 +276,7 @@ begin
         w_e_3 => w_e_3,            
         cont_src_3 => cont_src_3,        
         cont_dst_3_exe => cont_dst_3_exe,    
-        cont_dst_3_fetch => cont_dst_3_exe, 
+        cont_dst_3_fetch => cont_dst_3_fetch, 
 
         add_src_4 => add_src_4,          
         add_dst_4_exe => add_dst_4_exe,    
@@ -284,7 +284,7 @@ begin
         w_e_4 => w_e_4,            
         cont_src_4 => cont_src_4,        
         cont_dst_4_exe => cont_dst_4_exe,    
-        cont_dst_4_fetch => cont_dst_4_exe, 
+        cont_dst_4_fetch => cont_dst_4_fetch, 
 
         add_src_5 => add_src_5,          
         add_dst_5_exe => add_dst_5_exe,    
@@ -292,7 +292,7 @@ begin
         w_e_5 => w_e_5,            
         cont_src_5 => cont_src_5,        
         cont_dst_5_exe => cont_dst_5_exe,    
-        cont_dst_5_fetch => cont_dst_5_exe, 
+        cont_dst_5_fetch => cont_dst_5_fetch, 
 
         add_src_6 => add_src_6,          
         add_dst_6_exe => add_dst_6_exe,    
@@ -300,7 +300,7 @@ begin
         w_e_6 => w_e_6,            
         cont_src_6 => cont_src_6,        
         cont_dst_6_exe => cont_dst_6_exe,    
-        cont_dst_6_fetch => cont_dst_6_exe, 
+        cont_dst_6_fetch => cont_dst_6_fetch, 
 
         add_src_7 => add_src_7,          
         add_dst_7_exe => add_dst_7_exe,    
@@ -308,7 +308,7 @@ begin
         w_e_7 => w_e_7,            
         cont_src_7 => cont_src_7,        
         cont_dst_7_exe => cont_dst_7_exe,    
-        cont_dst_7_fetch => cont_dst_7_exe 
+        cont_dst_7_fetch => cont_dst_7_fetch 
 
 
     );

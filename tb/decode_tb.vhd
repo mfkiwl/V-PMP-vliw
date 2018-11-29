@@ -8,14 +8,16 @@ use work.common_pkg.all;
 
 entity decode_tb is
     Port (
+    exe_syllable              : out std_logic_vector(63 downto 0); -- syllable to exe stage
+    exe_operand_src           : out std_logic_vector(63 downto 0); -- SRC reg content
+    exe_operand_dst           : out std_logic_vector(63 downto 0); -- DST reg content
+    exe_immediate             : out std_logic_vector(31 downto 0); -- immediate in the instruction
+    exe_opc                   : out std_logic_vector(1 downto 0);  -- execution stage opc 00=alu64, 01=alu32, 10= mem, 11= branch
+    exe_dest_reg              : out std_logic_vector(3 downto 0);  -- exe stage destination register for writeback 
+    exe_offset                : out std_logic_vector(15 downto 0);
 
-             exe_operand_src       : out std_logic_vector(63 downto 0); 
-             exe_operand_dst       : out std_logic_vector(63 downto 0);
-             exe_immediate         : out std_logic_vector(31 downto 0);
-             exe_opc               : out std_logic_vector(1 downto 0);  -- execution stage opc 00=alu64, 01=alu32, 10= mem, 11= branch
-             exe_dest_reg          : out std_logic_vector(3 downto 0);  -- exe stage destination register for writeback 
-             exe_offset            : out std_logic_vector(15 downto 0);
-             dbus_addr_read        : out std_logic_vector(63 downto 0)
+    -- READ BUS FOR PREFETCH
+    dbus_addr_read        : out std_logic_vector(63 downto 0)  -- data bus address read for memory prefetch
 
 );
 end decode_tb;
@@ -39,28 +41,32 @@ architecture Behavioral of decode_tb is
 begin
 
 DECODE_STAGE: entity work.decode_stage port map (         
-clk              ,        
-reset            ,        
-branch           ,        
-                 
-syllable         ,        
+clk               ,
+reset             ,
+branch            ,
 
-src_reg_add      ,        
-src_reg_cont     ,        
-dst_reg_add      ,        
-dst_reg_cont     ,        
-
-exe_operand_src  ,        
-exe_operand_dst  ,        
-exe_immediate    ,        
-exe_opc          ,        
-exe_dest_reg     ,        
-exe_offset       ,        
-
-dbus_addr_read   ,  
-                 
-exe_result       ,
-wb_reg_add);           
+syllable          ,
+                  
+src_reg_add       ,
+src_reg_cont      ,
+dst_reg_add       ,
+dst_reg_cont      ,
+                  
+exe_syllable      ,
+exe_operand_src   ,
+exe_operand_dst   ,
+exe_immediate     ,
+exe_opc           ,
+exe_dest_reg      ,
+exe_offset        ,
+                  
+-- READ BUS FOR PREFETCH                
+dbus_addr_read    ,
+                  
+ -- LANE FORWARDING                 
+exe_result        ,
+wb_reg_add        
+);           
 
     clk <= not(clk) after 10ns;
     reset <= '0' after 15ns;

@@ -52,17 +52,17 @@ end PMP_sys;
 architecture Behavioral of PMP_sys is
 
   signal reset_s             : std_logic;
-  signal imem_addr_s         : std_logic_vector(7 downto 0);
-  signal imem_instr_s        : std_logic_vector(255 downto 0);
+  signal imem_addr_s         : std_logic_vector(15 downto 0);
+  signal imem_instr_s        : std_logic_vector(511 downto 0);
 
-  signal dbus_data_out_0_s     : std_logic_vector(31 downto 0);
-  signal dbus_data_out_1_s     : std_logic_vector(31 downto 0);
-  signal dbus_data_out_2_s     : std_logic_vector(31 downto 0);
-  signal dbus_data_out_3_s     : std_logic_vector(31 downto 0);
-  signal dbus_data_out_4_s     : std_logic_vector(31 downto 0);
-  signal dbus_data_out_5_s     : std_logic_vector(31 downto 0);
-  signal dbus_data_out_6_s     : std_logic_vector(31 downto 0);
-  signal dbus_data_out_7_s     : std_logic_vector(31 downto 0);
+  signal dbus_data_out_0_s     : std_logic_vector(63 downto 0);
+  signal dbus_data_out_1_s     : std_logic_vector(63 downto 0);
+  signal dbus_data_out_2_s     : std_logic_vector(63 downto 0);
+  signal dbus_data_out_3_s     : std_logic_vector(63 downto 0);
+  signal dbus_data_out_4_s     : std_logic_vector(63 downto 0);
+  signal dbus_data_out_5_s     : std_logic_vector(63 downto 0);
+  signal dbus_data_out_6_s     : std_logic_vector(63 downto 0);
+  signal dbus_data_out_7_s     : std_logic_vector(63 downto 0);
 
   signal dbus_data_amnt_0_s : std_logic_vector(4 downto 0);
   signal dbus_data_amnt_1_s : std_logic_vector(4 downto 0);
@@ -73,32 +73,32 @@ architecture Behavioral of PMP_sys is
   signal dbus_data_amnt_6_s : std_logic_vector(4 downto 0);
   signal dbus_data_amnt_7_s : std_logic_vector(4 downto 0);
 
-  signal dbus_data_in_0_s    : std_logic_vector(31 downto 0);
-  signal dbus_data_in_1_s    : std_logic_vector(31 downto 0);
-  signal dbus_data_in_2_s    : std_logic_vector(31 downto 0);
-  signal dbus_data_in_3_s    : std_logic_vector(31 downto 0);
-  signal dbus_data_in_4_s    : std_logic_vector(31 downto 0);
-  signal dbus_data_in_5_s    : std_logic_vector(31 downto 0);
-  signal dbus_data_in_6_s    : std_logic_vector(31 downto 0);
-  signal dbus_data_in_7_s    : std_logic_vector(31 downto 0);
+  signal dbus_data_in_0_s    : std_logic_vector(63 downto 0);
+  signal dbus_data_in_1_s    : std_logic_vector(63 downto 0);
+  signal dbus_data_in_2_s    : std_logic_vector(63 downto 0);
+  signal dbus_data_in_3_s    : std_logic_vector(63 downto 0);
+  signal dbus_data_in_4_s    : std_logic_vector(63 downto 0);
+  signal dbus_data_in_5_s    : std_logic_vector(63 downto 0);
+  signal dbus_data_in_6_s    : std_logic_vector(63 downto 0);
+  signal dbus_data_in_7_s    : std_logic_vector(63 downto 0);
 
-  signal dbus_addr_read_0_s  : std_logic_vector(31 downto 0);
-  signal dbus_addr_read_1_s  : std_logic_vector(31 downto 0);
-  signal dbus_addr_read_2_s  : std_logic_vector(31 downto 0);
-  signal dbus_addr_read_3_s  : std_logic_vector(31 downto 0);
-  signal dbus_addr_read_4_s  : std_logic_vector(31 downto 0);
-  signal dbus_addr_read_5_s  : std_logic_vector(31 downto 0);
-  signal dbus_addr_read_6_s  : std_logic_vector(31 downto 0);
-  signal dbus_addr_read_7_s  : std_logic_vector(31 downto 0);
+  signal dbus_addr_read_0_s  : std_logic_vector(63 downto 0);
+  signal dbus_addr_read_1_s  : std_logic_vector(63 downto 0);
+  signal dbus_addr_read_2_s  : std_logic_vector(63 downto 0);
+  signal dbus_addr_read_3_s  : std_logic_vector(63 downto 0);
+  signal dbus_addr_read_4_s  : std_logic_vector(63 downto 0);
+  signal dbus_addr_read_5_s  : std_logic_vector(63 downto 0);
+  signal dbus_addr_read_6_s  : std_logic_vector(63 downto 0);
+  signal dbus_addr_read_7_s  : std_logic_vector(63 downto 0);
 
-  signal dbus_add_wrt_0_s      : std_logic_vector(31 downto 0);
-  signal dbus_add_wrt_1_s      : std_logic_vector(31 downto 0);
-  signal dbus_add_wrt_2_s      : std_logic_vector(31 downto 0);
-  signal dbus_add_wrt_3_s      : std_logic_vector(31 downto 0);
-  signal dbus_add_wrt_4_s      : std_logic_vector(31 downto 0);
-  signal dbus_add_wrt_5_s      : std_logic_vector(31 downto 0);
-  signal dbus_add_wrt_6_s      : std_logic_vector(31 downto 0);
-  signal dbus_add_wrt_7_s      : std_logic_vector(31 downto 0);
+  signal dbus_add_wrt_0_s      : std_logic_vector(63 downto 0);
+  signal dbus_add_wrt_1_s      : std_logic_vector(63 downto 0);
+  signal dbus_add_wrt_2_s      : std_logic_vector(63 downto 0);
+  signal dbus_add_wrt_3_s      : std_logic_vector(63 downto 0);
+  signal dbus_add_wrt_4_s      : std_logic_vector(63 downto 0);
+  signal dbus_add_wrt_5_s      : std_logic_vector(63 downto 0);
+  signal dbus_add_wrt_6_s      : std_logic_vector(63 downto 0);
+  signal dbus_add_wrt_7_s      : std_logic_vector(63 downto 0);
 
   signal dbus_w_e_0_s          : std_logic;
   signal dbus_w_e_1_s          : std_logic;
@@ -113,43 +113,43 @@ architecture Behavioral of PMP_sys is
   signal stop_s              : std_logic;
   signal cycles_s            : std_logic_vector(31 downto 0);
 
-  signal axis_data_read_0_s  : std_logic_vector(31 downto 0); -- addresses for AXIS_DATA_RAM
-  signal axis_data_read_1_s  : std_logic_vector(31 downto 0);
-  signal axis_data_read_2_s  : std_logic_vector(31 downto 0);
-  signal axis_data_read_3_s  : std_logic_vector(31 downto 0);
-  signal axis_data_read_4_s  : std_logic_vector(31 downto 0); 
-  signal axis_data_read_5_s  : std_logic_vector(31 downto 0);
-  signal axis_data_read_6_s  : std_logic_vector(31 downto 0);
-  signal axis_data_read_7_s  : std_logic_vector(31 downto 0);
+  signal axis_data_read_0_s  : std_logic_vector(63 downto 0); -- addresses for AXIS_DATA_RAM
+  signal axis_data_read_1_s  : std_logic_vector(63 downto 0);
+  signal axis_data_read_2_s  : std_logic_vector(63 downto 0);
+  signal axis_data_read_3_s  : std_logic_vector(63 downto 0);
+  signal axis_data_read_4_s  : std_logic_vector(63 downto 0); 
+  signal axis_data_read_5_s  : std_logic_vector(63 downto 0);
+  signal axis_data_read_6_s  : std_logic_vector(63 downto 0);
+  signal axis_data_read_7_s  : std_logic_vector(63 downto 0);
 
-  signal axis_data_out_0_s   : std_logic_vector(31 downto 0); -- data from AXIS_DATA_RAM
-  signal axis_data_out_1_s   : std_logic_vector(31 downto 0);
-  signal axis_data_out_2_s   : std_logic_vector(31 downto 0);
-  signal axis_data_out_3_s   : std_logic_vector(31 downto 0);
-  signal axis_data_out_4_s   : std_logic_vector(31 downto 0); 
-  signal axis_data_out_5_s   : std_logic_vector(31 downto 0);
-  signal axis_data_out_6_s   : std_logic_vector(31 downto 0);
-  signal axis_data_out_7_s   : std_logic_vector(31 downto 0);
+  signal axis_data_out_0_s   : std_logic_vector(63 downto 0); -- data from AXIS_DATA_RAM
+  signal axis_data_out_1_s   : std_logic_vector(63 downto 0);
+  signal axis_data_out_2_s   : std_logic_vector(63 downto 0);
+  signal axis_data_out_3_s   : std_logic_vector(63 downto 0);
+  signal axis_data_out_4_s   : std_logic_vector(63 downto 0); 
+  signal axis_data_out_5_s   : std_logic_vector(63 downto 0);
+  signal axis_data_out_6_s   : std_logic_vector(63 downto 0);
+  signal axis_data_out_7_s   : std_logic_vector(63 downto 0);
 
   signal axis_wrt_add_s      : std_logic_vector(5 downto 0);  -- write address from data ram to tuser ram of axis
 
-  signal axis_tuser_read_0_s : std_logic_vector(31 downto 0); -- read addresses for tuser
-  signal axis_tuser_read_1_s : std_logic_vector(31 downto 0);
-  signal axis_tuser_read_2_s : std_logic_vector(31 downto 0);
-  signal axis_tuser_read_3_s : std_logic_vector(31 downto 0);
-  signal axis_tuser_read_4_s : std_logic_vector(31 downto 0);
-  signal axis_tuser_read_5_s : std_logic_vector(31 downto 0);
-  signal axis_tuser_read_6_s : std_logic_vector(31 downto 0);
-  signal axis_tuser_read_7_s : std_logic_vector(31 downto 0);
+  signal axis_tuser_read_0_s : std_logic_vector(63 downto 0); -- read addresses for tuser
+  signal axis_tuser_read_1_s : std_logic_vector(63 downto 0);
+  signal axis_tuser_read_2_s : std_logic_vector(63 downto 0);
+  signal axis_tuser_read_3_s : std_logic_vector(63 downto 0);
+  signal axis_tuser_read_4_s : std_logic_vector(63 downto 0);
+  signal axis_tuser_read_5_s : std_logic_vector(63 downto 0);
+  signal axis_tuser_read_6_s : std_logic_vector(63 downto 0);
+  signal axis_tuser_read_7_s : std_logic_vector(63 downto 0);
 
-  signal axis_tuser_out_0_s  : std_logic_vector(31 downto 0); -- data from tuser out
-  signal axis_tuser_out_1_s  : std_logic_vector(31 downto 0);
-  signal axis_tuser_out_2_s  : std_logic_vector(31 downto 0);
-  signal axis_tuser_out_3_s  : std_logic_vector(31 downto 0);
-  signal axis_tuser_out_4_s  : std_logic_vector(31 downto 0);
-  signal axis_tuser_out_5_s  : std_logic_vector(31 downto 0);
-  signal axis_tuser_out_6_s  : std_logic_vector(31 downto 0);
-  signal axis_tuser_out_7_s  : std_logic_vector(31 downto 0);
+  signal axis_tuser_out_0_s  : std_logic_vector(63 downto 0); -- data from tuser out
+  signal axis_tuser_out_1_s  : std_logic_vector(63 downto 0);
+  signal axis_tuser_out_2_s  : std_logic_vector(63 downto 0);
+  signal axis_tuser_out_3_s  : std_logic_vector(63 downto 0);
+  signal axis_tuser_out_4_s  : std_logic_vector(63 downto 0);
+  signal axis_tuser_out_5_s  : std_logic_vector(63 downto 0);
+  signal axis_tuser_out_6_s  : std_logic_vector(63 downto 0);
+  signal axis_tuser_out_7_s  : std_logic_vector(63 downto 0);
 
   signal data_ram_addr_read_0 : std_logic_vector(7 downto 0);
   signal data_ram_addr_read_1 : std_logic_vector(7 downto 0);
@@ -169,23 +169,23 @@ architecture Behavioral of PMP_sys is
   signal data_ram_addr_wrt_6 : std_logic_vector(7 downto 0);
   signal data_ram_addr_wrt_7 : std_logic_vector(7 downto 0);
 
-  signal data_ram_data_out_0 : std_logic_vector(31 downto 0);
-  signal data_ram_data_out_1 : std_logic_vector(31 downto 0);
-  signal data_ram_data_out_2 : std_logic_vector(31 downto 0);
-  signal data_ram_data_out_3 : std_logic_vector(31 downto 0);
-  signal data_ram_data_out_4 : std_logic_vector(31 downto 0);
-  signal data_ram_data_out_5 : std_logic_vector(31 downto 0);
-  signal data_ram_data_out_6 : std_logic_vector(31 downto 0);
-  signal data_ram_data_out_7 : std_logic_vector(31 downto 0);
+  signal data_ram_data_out_0 : std_logic_vector(63 downto 0);
+  signal data_ram_data_out_1 : std_logic_vector(63 downto 0);
+  signal data_ram_data_out_2 : std_logic_vector(63 downto 0);
+  signal data_ram_data_out_3 : std_logic_vector(63 downto 0);
+  signal data_ram_data_out_4 : std_logic_vector(63 downto 0);
+  signal data_ram_data_out_5 : std_logic_vector(63 downto 0);
+  signal data_ram_data_out_6 : std_logic_vector(63 downto 0);
+  signal data_ram_data_out_7 : std_logic_vector(63 downto 0);
 
-  signal data_ram_data_in_0 : std_logic_vector(31 downto 0);
-  signal data_ram_data_in_1 : std_logic_vector(31 downto 0);
-  signal data_ram_data_in_2 : std_logic_vector(31 downto 0);
-  signal data_ram_data_in_3 : std_logic_vector(31 downto 0);
-  signal data_ram_data_in_4 : std_logic_vector(31 downto 0);
-  signal data_ram_data_in_5 : std_logic_vector(31 downto 0);
-  signal data_ram_data_in_6 : std_logic_vector(31 downto 0);
-  signal data_ram_data_in_7 : std_logic_vector(31 downto 0);
+  signal data_ram_data_in_0 : std_logic_vector(63 downto 0);
+  signal data_ram_data_in_1 : std_logic_vector(63 downto 0);
+  signal data_ram_data_in_2 : std_logic_vector(63 downto 0);
+  signal data_ram_data_in_3 : std_logic_vector(63 downto 0);
+  signal data_ram_data_in_4 : std_logic_vector(63 downto 0);
+  signal data_ram_data_in_5 : std_logic_vector(63 downto 0);
+  signal data_ram_data_in_6 : std_logic_vector(63 downto 0);
+  signal data_ram_data_in_7 : std_logic_vector(63 downto 0);
 
   signal data_ram_wrt_en_0 : std_logic;
   signal data_ram_wrt_en_1 : std_logic;
