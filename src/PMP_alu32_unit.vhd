@@ -44,6 +44,7 @@ begin
         result_gr_red <= (others => '0');
         gr_add_w <= (others => '0');
         w_e_gr <= '0';
+        opc_string <= "_____";
 
         if (alu32_select = '1') then -- START EXECUTING
 
@@ -98,19 +99,19 @@ begin
                     w_e_gr <= '1';
                     opc_string <= "__MUL";
 
-                when DIVI32_OPC =>
+--                when DIVI32_OPC =>
 
-                    result_gr_red <= std_logic_vector(to_signed(to_integer(signed(operand_dst(31 downto 0)) / signed(immediate)),32));
-                    gr_add_w <= gr_add_dst;
-                    w_e_gr <= '1';
-                    opc_string <= "_DIVI";
+--                    result_gr_red <= std_logic_vector(to_signed(to_integer(signed(operand_dst(31 downto 0)) / signed(immediate)),32));
+--                    gr_add_w <= gr_add_dst;
+--                    w_e_gr <= '1';
+--                    opc_string <= "_DIVI";
 
-                when DIV32_OPC => 
+--                when DIV32_OPC => 
 
-                    result_gr_red <= std_logic_vector(to_signed(to_integer(signed(operand_dst(31 downto 0)) / signed(operand_src(31 downto 0))),32));
-                    gr_add_w <= gr_add_dst;
-                    w_e_gr <= '1';
-                    opc_string <= "__DIV";
+--                    result_gr_red <= std_logic_vector(to_signed(to_integer(signed(operand_dst(31 downto 0)) / signed(operand_src(31 downto 0))),32));
+--                    gr_add_w <= gr_add_dst;
+--                    w_e_gr <= '1';
+--                    opc_string <= "__DIV";
 
                 when ORI32_OPC =>
 
@@ -173,19 +174,19 @@ begin
                     w_e_gr <= '1';
                     opc_string <= "__NEG";
 
-                when MODI32_OPC =>
+--                when MODI32_OPC =>
 
-                    result_gr_red <= std_logic_vector(signed(operand_dst(31 downto 0)) mod signed(immediate));
-                    gr_add_w <= gr_add_dst;
-                    w_e_gr <= '1';
-                    opc_string <= "_MODI";
+--                    result_gr_red <= std_logic_vector(signed(operand_dst(31 downto 0)) mod signed(immediate));
+--                    gr_add_w <= gr_add_dst;
+--                    w_e_gr <= '1';
+--                    opc_string <= "_MODI";
 
-                when MOD32_OPC =>
+--                when MOD32_OPC =>
 
-                    result_gr_red <= std_logic_vector(signed(operand_dst(31 downto 0)) mod signed(operand_src(31 downto 0)));
-                    gr_add_w <= gr_add_dst;
-                    w_e_gr <= '1';
-                    opc_string <= "__MOD";
+--                    result_gr_red <= std_logic_vector(signed(operand_dst(31 downto 0)) mod signed(operand_src(31 downto 0)));
+--                    gr_add_w <= gr_add_dst;
+--                    w_e_gr <= '1';
+--                    opc_string <= "__MOD";
 
                 when XORI32_OPC =>
 

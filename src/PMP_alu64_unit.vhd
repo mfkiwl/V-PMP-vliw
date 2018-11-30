@@ -48,12 +48,13 @@ begin
     dst_integer <= to_integer(signed(operand_dst));
 
 
-    alu_control : process(opc, alu64_select, operand_src, operand_dst, immediate, gr_add_dst)
+    alu_control : process(opc, alu64_select, operand_src, operand_dst, immediate, gr_add_dst, immediate_integer, dst_integer)
 
     begin
         result_gr <= (others => '0');
         gr_add_w <= (others => '0');
         w_e_gr <= '0';
+        opc_string <= "_____";
 
         if (alu64_select = '1') then -- START EXECUTING
 
@@ -109,19 +110,19 @@ begin
                     w_e_gr <= '1';
                     opc_string <= "__MUL";
 
-                when DIVI_OPC =>
+--                when DIVI_OPC =>
 
-                    result_gr <= std_logic_vector(to_signed(to_integer(signed(operand_dst) / signed(immediate)),64));
-                    gr_add_w <= gr_add_dst;
-                    w_e_gr <= '1';
-                    opc_string <= "_DIVI";
+--                    result_gr <= std_logic_vector(to_signed(to_integer(signed(operand_dst) / signed(immediate)),64));
+--                    gr_add_w <= gr_add_dst;
+--                    w_e_gr <= '1';
+--                    opc_string <= "_DIVI";
 
-                when DIV_OPC => 
+--                when DIV_OPC => 
 
-                    result_gr <= std_logic_vector(to_signed(to_integer(signed(operand_dst) / signed(operand_src)),64));
-                    gr_add_w <= gr_add_dst;
-                    w_e_gr <= '1';
-                    opc_string <= "__DIV";
+--                    result_gr <= std_logic_vector(to_signed(to_integer(signed(operand_dst) / signed(operand_src)),64));
+--                    gr_add_w <= gr_add_dst;
+--                    w_e_gr <= '1';
+--                    opc_string <= "__DIV";
 
                 when ORI_OPC =>
 
@@ -186,19 +187,19 @@ begin
                     w_e_gr <= '1';
                     opc_string <= "__NEG";
 
-                when MODI_OPC =>
+--                when MODI_OPC =>
 
-                    result_gr <= std_logic_vector(to_signed(dst_integer mod immediate_integer,result_gr'length));
-                    gr_add_w <= gr_add_dst;
-                    w_e_gr <= '1';
-                    opc_string <= "_MODI";
+--                    result_gr <= std_logic_vector(to_signed(dst_integer mod immediate_integer,result_gr'length));
+--                    gr_add_w <= gr_add_dst;
+--                    w_e_gr <= '1';
+--                    opc_string <= "_MODI";
 
-                when MOD_OPC =>
+--                when MOD_OPC =>
 
-                    result_gr <= std_logic_vector(signed(operand_dst) mod signed(operand_src));
-                    gr_add_w <= gr_add_dst;
-                    w_e_gr <= '1';
-                    opc_string <= "__MOD";
+--                    result_gr <= std_logic_vector(signed(operand_dst) mod signed(operand_src));
+--                    gr_add_w <= gr_add_dst;
+--                    w_e_gr <= '1';
+--                    opc_string <= "__MOD";
 
                 when XORI_OPC =>
 
@@ -260,3 +261,5 @@ begin
 
 
         end Behavioral;
+
+

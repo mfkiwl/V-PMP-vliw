@@ -43,10 +43,9 @@ begin
 
     opc <= syllable(7 downto 0);
 
-    RAM_MEMORY : process (opc, mem_select, operand_src, operand_dst, immediate, gr_add_dst, reset)
+    RAM_MEMORY : process (opc, mem_select, operand_src, operand_dst, immediate, gr_add_dst, mem_data_in, offset)
     begin
 
-    if (reset ='1') then
     
     mem_data_out <= (others => '0');  
     mem_wrt_addr <= (others => '0');     
@@ -56,9 +55,8 @@ begin
     result_gr <= (others => '0');
     mem_wrt_amount <= (others => '0');
    
-   else
-
-        if (mem_select = '1') then--and (reset = '0') then
+   
+        if (mem_select = '1') then
           
           else
 
@@ -164,7 +162,6 @@ begin
 
             end case;
             end if;
-   end if;
     --when LDABSW_OPC =>      SEE KERNEL DOCUMENTATION                                                     
     --            when LDABSH_OPC =>                                                            
     --            when LDABSB_OPC =>                                                           
