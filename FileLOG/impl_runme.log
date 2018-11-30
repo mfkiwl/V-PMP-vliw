@@ -1,0 +1,256 @@
+
+*** Running vivado
+    with args -log PMP_core.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source PMP_core.tcl -notrace
+
+WARNING: Default location for XILINX_VIVADO_HLS not found: 
+
+****** Vivado v2016.4 (64-bit)
+  **** SW Build 1756540 on Mon Jan 23 19:11:19 MST 2017
+  **** IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source PMP_core.tcl -notrace
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Netlist 29-17] Analyzing 1085 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2016.4
+INFO: [Device 21-403] Loading part xc7vx485tffg1157-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/home/alessandro/Documenti/vpmp_prj/vpmp_prj.srcs/constrs_1/new/XDC.xdc]
+Finished Parsing XDC File [/home/alessandro/Documenti/vpmp_prj/vpmp_prj.srcs/constrs_1/new/XDC.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+link_design: Time (s): cpu = 00:00:30 ; elapsed = 00:00:35 . Memory (MB): peak = 1505.809 ; gain = 497.836 ; free physical = 92267 ; free virtual = 246030
+INFO: [Vivado_Tcl 4-424] Cannot write hardware definition file as there are no IPI block design hardware handoff files present
+Command: opt_design -directive Explore
+INFO: [Vivado_Tcl 4-136] Directive used for opt_design is: Explore
+Attempting to get a license for feature 'Implementation' and/or device 'xc7vx485t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7vx485t'
+INFO: [Common 17-1223] The version limit for your license is '2018.05' and will expire in -183 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.92 . Memory (MB): peak = 1610.844 ; gain = 96.031 ; free physical = 92240 ; free virtual = 246002
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+
+Starting Logic Optimization Task
+Implement Debug Cores | Checksum: 55a2a3fa
+
+Phase 1 Retarget
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 1 Retarget | Checksum: 236814ff
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 2140.586 ; gain = 0.000 ; free physical = 91777 ; free virtual = 245539
+
+Phase 2 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-10] Eliminated 0 cells.
+Phase 2 Constant propagation | Checksum: 236814ff
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2140.586 ; gain = 0.000 ; free physical = 91771 ; free virtual = 245534
+
+Phase 3 Sweep
+INFO: [Opt 31-12] Eliminated 2079 unconnected nets.
+INFO: [Opt 31-11] Eliminated 0 unconnected cells.
+Phase 3 Sweep | Checksum: 3301f12b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2140.586 ; gain = 0.000 ; free physical = 91771 ; free virtual = 245534
+
+Phase 4 BUFG optimization
+INFO: [Opt 31-12] Eliminated 0 unconnected nets.
+INFO: [Opt 31-11] Eliminated 0 unconnected cells.
+Phase 4 BUFG optimization | Checksum: 3301f12b
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2140.586 ; gain = 0.000 ; free physical = 91771 ; free virtual = 245534
+
+Phase 5 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-10] Eliminated 0 cells.
+Phase 5 Constant propagation | Checksum: 3301f12b
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2140.586 ; gain = 0.000 ; free physical = 91770 ; free virtual = 245532
+
+Phase 6 Sweep
+INFO: [Opt 31-12] Eliminated 0 unconnected nets.
+INFO: [Opt 31-11] Eliminated 0 unconnected cells.
+Phase 6 Sweep | Checksum: 3301f12b
+
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 2140.586 ; gain = 0.000 ; free physical = 91770 ; free virtual = 245532
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00.18 ; elapsed = 00:00:00.19 . Memory (MB): peak = 2140.586 ; gain = 0.000 ; free physical = 91770 ; free virtual = 245532
+Ending Logic Optimization Task | Checksum: 3301f12b
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2140.586 ; gain = 0.000 ; free physical = 91769 ; free virtual = 245532
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+Ending Power Optimization Task | Checksum: 3301f12b
+
+Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:00.09 . Memory (MB): peak = 2140.586 ; gain = 0.000 ; free physical = 91769 ; free virtual = 245532
+INFO: [Common 17-83] Releasing license: Implementation
+29 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 2140.586 ; gain = 634.777 ; free physical = 91769 ; free virtual = 245532
+INFO: [Common 17-1381] The checkpoint '/home/alessandro/Documenti/vpmp_prj/vpmp_prj.runs/impl_1/PMP_core_opt.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:07 ; elapsed = 00:00:11 . Memory (MB): peak = 2164.598 ; gain = 24.012 ; free physical = 91763 ; free virtual = 245530
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Coretcl 2-168] The results of DRC are in file /home/alessandro/Documenti/vpmp_prj/vpmp_prj.runs/impl_1/PMP_core_drc_opted.rpt.
+report_drc: Time (s): cpu = 00:00:14 ; elapsed = 00:00:12 . Memory (MB): peak = 2204.617 ; gain = 40.020 ; free physical = 91746 ; free virtual = 245512
+INFO: [Chipscope 16-241] No debug cores found in the current design.
+Before running the implement_debug_core command, either use the Set Up Debug wizard (GUI mode)
+or use the create_debug_core and connect_debug_core Tcl commands to insert debug cores into the design.
+Command: place_design -directive Explore
+Attempting to get a license for feature 'Implementation' and/or device 'xc7vx485t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7vx485t'
+INFO: [Common 17-1223] The version limit for your license is '2018.05' and will expire in -183 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+Starting Placer Task
+INFO: [Place 46-5] The placer was invoked with the 'Explore' directive.
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 8 CPUs
+
+Phase 1 Placer Initialization
+Netlist sorting complete. Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.11 . Memory (MB): peak = 2204.617 ; gain = 0.000 ; free physical = 91746 ; free virtual = 245512
+Netlist sorting complete. Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.05 . Memory (MB): peak = 2204.617 ; gain = 0.000 ; free physical = 91746 ; free virtual = 245512
+
+Phase 1.1 IO Placement/ Clock Placement/ Build Placer Device
+ERROR: [Place 30-415] IO Placement failed due to overutilization. This design contains 2235 I/O ports
+ while the target  device: 7vx485t package: ffg1157, contains only 600 available user I/O. The target device has 600 usable I/O pins of which 0 are already occupied by user-locked I/Os.
+ To rectify this issue:
+ 1. Ensure you are targeting the correct device and package.  Select a larger device or different package if necessary.
+ 2. Check the top-level ports of the design to ensure the correct number of ports are specified.
+ 3. Consider design changes to reduce the number of I/Os necessary.
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+ERROR: [Place 30-68] Instance clk_IBUF_BUFG_inst (BUFG) is not placed
+ERROR: [Place 30-68] Instance clk_IBUF_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[0]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[10]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[11]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[12]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[13]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[14]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[15]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[16]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[17]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[18]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[19]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[1]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[20]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[21]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[22]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[23]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[24]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[25]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[26]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[27]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[28]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[29]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[2]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[30]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[31]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[3]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[4]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[5]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[6]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[7]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[8]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance cycles_OBUF[9]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[0]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[10]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[11]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[12]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[13]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[14]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[15]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[16]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[17]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[18]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[19]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[1]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[20]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[21]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[22]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[23]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[24]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[25]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[26]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[27]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[28]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[29]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[2]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[30]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[31]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[32]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[33]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[34]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[35]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[36]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[37]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[38]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[39]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[3]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[40]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[41]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[42]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[43]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[44]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[45]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[46]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[47]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[48]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[49]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[4]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[50]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[51]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[52]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[53]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[54]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[55]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[56]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[57]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[58]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[59]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[5]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[60]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[61]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[62]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[63]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[6]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[7]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[8]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_0_OBUF[9]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_1_OBUF[0]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance dbus_addr_read_1_OBUF[10]_inst (OBUF) is not placed
+INFO: [Common 17-14] Message 'Place 30-68' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+Phase 1.1 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 9682808f
+
+Time (s): cpu = 00:00:19 ; elapsed = 00:00:16 . Memory (MB): peak = 2216.602 ; gain = 11.984 ; free physical = 91715 ; free virtual = 245481
+Phase 1 Placer Initialization | Checksum: 9682808f
+
+Time (s): cpu = 00:00:19 ; elapsed = 00:00:16 . Memory (MB): peak = 2216.602 ; gain = 11.984 ; free physical = 91715 ; free virtual = 245481
+ERROR: [Place 30-99] Placer failed with error: 'IO Clock Placer failed'
+Please review all ERROR, CRITICAL WARNING, and WARNING messages during placement to understand the cause for failure.
+Ending Placer Task | Checksum: 9682808f
+
+Time (s): cpu = 00:00:19 ; elapsed = 00:00:16 . Memory (MB): peak = 2216.602 ; gain = 11.984 ; free physical = 91715 ; free virtual = 245481
+INFO: [Common 17-83] Releasing license: Implementation
+46 Infos, 0 Warnings, 0 Critical Warnings and 103 Errors encountered.
+place_design failed
+ERROR: [Common 17-69] Command failed: Placer could not place all instances
+INFO: [Common 17-206] Exiting Vivado at Fri Nov 30 11:38:13 2018...
