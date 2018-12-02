@@ -31,20 +31,45 @@ architecture Behavioral of alu32 is
     signal opc : std_logic_vector(7 downto 0);
     signal result_gr_red : std_logic_vector(31 downto 0);
     signal opc_string : string(1 to 5);
+    signal s_axis_divisor_tvalid : std_logic;
+    signal s_axis_divisor_tdata: std_logic_vector(31 downto 0);
+    signal s_axis_dividend_tvalid : std_logic;
+    signal s_axis_dividend_tdata : std_logic_vector(31 downto 0);
+    signal m_axis_dout_tvalid : std_logic;
+    signal m_axis_dout_tdata : std_logic_vector(63 downto 0);
+    signal quotient: std_logic_vector(31 downto 0);
+    signal remainder: std_logic_vector(31 downto 0);
 
 begin
 
+DIV_32: entity work.divider_32 port map (
+    s_axis_divisor_tvalid => s_axis_divisor_tvalid,
+    s_axis_divisor_tdata => s_axis_divisor_tdata,
+    s_axis_dividend_tvalid => s_axis_dividend_tvalid,
+    s_axis_dividend_tdata => s_axis_dividend_tdata,
+    m_axis_dout_tvalid => m_axis_dout_tvalid,
+    m_axis_dout_tdata => m_axis_dout_tdata
+  );
+  
     opc <= syllable(7 downto 0);
     result_gr <= x"00000000" & result_gr_red;
+    
+    quotient <= m_axis_dout_tdata(63 downto 32) when m_axis_dout_tvalid = '1' else
+                (others => '0');
+                
+    remainder <= m_axis_dout_tdata(63 downto 32) when m_axis_dout_tvalid = '1' else
+                (others => '0');
 
-    alu_control : process(opc, alu32_select, operand_src, operand_dst, immediate, gr_add_dst)
+    alu_control : process(opc, alu32_select, operand_src, operand_dst, immediate, gr_add_dst,m_axis_dout_tvalid,m_axis_dout_tdata)
 
     begin
 
-        result_gr_red <= (others => '0');
+        result_gr <= (others => '0');
         gr_add_w <= (others => '0');
         w_e_gr <= '0';
         opc_string <= "_____";
+        s_axis_divisor_tvalid <= '0';
+        s_axis_dividend_tvalid <= '0';
 
         if (alu32_select = '1') then -- START EXECUTING
 
@@ -99,19 +124,27 @@ begin
                     w_e_gr <= '1';
                     opc_string <= "__MUL";
 
---                when DIVI32_OPC =>
+                when DIVI32_OPC =>
 
---                    result_gr_red <= std_logic_vector(to_signed(to_integer(signed(operand_dst(31 downto 0)) / signed(immediate)),32));
---                    gr_add_w <= gr_add_dst;
---                    w_e_gr <= '1';
---                    opc_string <= "_DIVI";
+                    opc_string <= "_DIVI";
+                    result_gr_red <= quotient;
+                    gr_add_w <= gr_add_dst;
+                    w_e_gr <= '1';
+                    s_axis_divisor_tdata <= immediate;
+                    s_axis_dividend_tdata <= operand_dst(31 downto 0);
+                    s_axis_divisor_tvalid <= '1';
+                    s_axis_dividend_tvalid <= '1';
 
---                when DIV32_OPC => 
+                when DIV32_OPC => 
 
---                    result_gr_red <= std_logic_vector(to_signed(to_integer(signed(operand_dst(31 downto 0)) / signed(operand_src(31 downto 0))),32));
---                    gr_add_w <= gr_add_dst;
---                    w_e_gr <= '1';
---                    opc_string <= "__DIV";
+                    opc_string <= "__DIV";
+                    result_gr_red <= quotient;
+                    gr_add_w <= gr_add_dst;
+                    w_e_gr <= '1';
+                    s_axis_divisor_tdata <= operand_src(31 downto 0);
+                    s_axis_dividend_tdata <= operand_dst(31 downto 0);
+                    s_axis_divisor_tvalid <= '1';
+                    s_axis_dividend_tvalid <= '1';
 
                 when ORI32_OPC =>
 
@@ -174,19 +207,27 @@ begin
                     w_e_gr <= '1';
                     opc_string <= "__NEG";
 
---                when MODI32_OPC =>
+                when MODI32_OPC =>
 
---                    result_gr_red <= std_logic_vector(signed(operand_dst(31 downto 0)) mod signed(immediate));
---                    gr_add_w <= gr_add_dst;
---                    w_e_gr <= '1';
---                    opc_string <= "_MODI";
+                    opc_string <= "_MODI";
+                    result_gr_red <=remainder;
+                    gr_add_w <= gr_add_dst;
+                    w_e_gr <= '1';
+                    s_axis_divisor_tdata <= immediate;
+                    s_axis_dividend_tdata <= operand_dst(31 downto 0);
+                    s_axis_divisor_tvalid <= '1';
+                    s_axis_dividend_tvalid <= '1';
 
---                when MOD32_OPC =>
+                when MOD32_OPC =>
 
---                    result_gr_red <= std_logic_vector(signed(operand_dst(31 downto 0)) mod signed(operand_src(31 downto 0)));
---                    gr_add_w <= gr_add_dst;
---                    w_e_gr <= '1';
---                    opc_string <= "__MOD";
+                    opc_string <= "__MOD";
+                    result_gr_red <= remainder;
+                    gr_add_w <= gr_add_dst;
+                    w_e_gr <= '1';
+                    s_axis_divisor_tdata <= operand_src(31 downto 0);
+                    s_axis_dividend_tdata <= operand_dst(31 downto 0);
+                    s_axis_divisor_tvalid <= '1';
+                    s_axis_dividend_tvalid <= '1';
 
                 when XORI32_OPC =>
 
