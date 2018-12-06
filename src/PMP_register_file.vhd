@@ -89,48 +89,10 @@ architecture Behavioral of gr_regfile is
 
     type gpr_type is array (15 downto 0) of std_logic_vector(63 downto 0);
 
-    signal reg_file : gpr_type := (others => x"0000000000000000"); 
-
-
---attribute mark_debug: string;
---attribute keep:string;
---attribute mark_debug of reg_file :signal is "TRUE";
---attribute keep of reg_file :signal is "TRUE";
+    signal reg_file : gpr_type; 
 
 
 begin
-
-    -- read process
-
-    process(clk)
-
-    begin
-
-        if rising_edge(clk) then
-
-            cont_src_0 <= reg_file(conv_integer(add_src_0));
-            cont_src_1 <= reg_file(conv_integer(add_src_1));
-            cont_src_2 <= reg_file(conv_integer(add_src_2));
-            cont_src_3 <= reg_file(conv_integer(add_src_3));
-            cont_src_4 <= reg_file(conv_integer(add_src_4));
-            cont_src_5 <= reg_file(conv_integer(add_src_5));
-            cont_src_6 <= reg_file(conv_integer(add_src_6));
-            cont_src_7 <= reg_file(conv_integer(add_src_7));
-
-            cont_dst_0_fetch <= reg_file(conv_integer(add_dst_0_fetch));
-            cont_dst_1_fetch <= reg_file(conv_integer(add_dst_1_fetch));
-            cont_dst_2_fetch <= reg_file(conv_integer(add_dst_2_fetch));
-            cont_dst_3_fetch <= reg_file(conv_integer(add_dst_3_fetch));
-            cont_dst_4_fetch <= reg_file(conv_integer(add_dst_4_fetch));
-            cont_dst_5_fetch <= reg_file(conv_integer(add_dst_5_fetch));
-            cont_dst_6_fetch <= reg_file(conv_integer(add_dst_6_fetch));
-            cont_dst_7_fetch <= reg_file(conv_integer(add_dst_7_fetch));
-
-        end if;
-
-    end process;
-
-    -- write process
 
     process(clk)
     begin
@@ -143,51 +105,70 @@ begin
                 reg_file <= (others => x"0000000000000000"); 
 
             else
+            
+                        cont_src_0 <= reg_file(conv_integer(add_src_0));
+                        cont_src_1 <= reg_file(conv_integer(add_src_1));
+                        cont_src_2 <= reg_file(conv_integer(add_src_2));
+                        cont_src_3 <= reg_file(conv_integer(add_src_3));
+                        cont_src_4 <= reg_file(conv_integer(add_src_4));
+                        cont_src_5 <= reg_file(conv_integer(add_src_5));
+                        cont_src_6 <= reg_file(conv_integer(add_src_6));
+                        cont_src_7 <= reg_file(conv_integer(add_src_7));
+            
+                        cont_dst_0_fetch <= reg_file(conv_integer(add_dst_0_fetch));
+                        cont_dst_1_fetch <= reg_file(conv_integer(add_dst_1_fetch));
+                        cont_dst_2_fetch <= reg_file(conv_integer(add_dst_2_fetch));
+                        cont_dst_3_fetch <= reg_file(conv_integer(add_dst_3_fetch));
+                        cont_dst_4_fetch <= reg_file(conv_integer(add_dst_4_fetch));
+                        cont_dst_5_fetch <= reg_file(conv_integer(add_dst_5_fetch));
+                        cont_dst_6_fetch <= reg_file(conv_integer(add_dst_6_fetch));
+                        cont_dst_7_fetch <= reg_file(conv_integer(add_dst_7_fetch));
+
 
 
                 if (w_e_0 = '1') then
 
                     reg_file(conv_integer(add_dst_0_exe)) <= cont_dst_0_exe;
 
-                --end if;
+                end if;
 
-                elsif (w_e_1 = '1') then
+                if (w_e_1 = '1') then
 
                     reg_file(conv_integer(add_dst_1_exe)) <= cont_dst_1_exe;
 
-                --end if;
+                end if;
 
-                elsif (w_e_2 = '1') then
+                if (w_e_2 = '1') then
 
                     reg_file(conv_integer(add_dst_2_exe)) <= cont_dst_2_exe;
 
-                --end if;
+                end if;
 
-                elsif (w_e_3 = '1') then
+                if (w_e_3 = '1') then
 
                     reg_file(conv_integer(add_dst_3_exe)) <= cont_dst_3_exe;
 
-                --end if;
+                end if;
 
-                elsif (w_e_4 = '1') then
+                if (w_e_4 = '1') then
 
                     reg_file(conv_integer(add_dst_4_exe)) <= cont_dst_4_exe;
 
-                --end if;
+                end if;
 
-                elsif (w_e_5 = '1') then
+                if (w_e_5 = '1') then
 
                     reg_file(conv_integer(add_dst_5_exe)) <= cont_dst_5_exe;
 
-                --end if;
+                end if;
 
-                elsif (w_e_6 = '1') then
+                if (w_e_6 = '1') then
 
                     reg_file(conv_integer(add_dst_6_exe)) <= cont_dst_6_exe;
 
-                --end if;
+                end if;
 
-                elsif (w_e_7 = '1') then
+                if (w_e_7 = '1') then
 
                     reg_file(conv_integer(add_dst_7_exe)) <= cont_dst_7_exe;
 

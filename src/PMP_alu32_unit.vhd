@@ -68,6 +68,8 @@ DIV_32: entity work.divider_32 port map (
         gr_add_w <= (others => '0');
         w_e_gr <= '0';
         opc_string <= "_____";
+                s_axis_divisor_tdata <= (others => '0');
+        s_axis_dividend_tdata <= (others => '0');
         s_axis_divisor_tvalid <= '0';
         s_axis_dividend_tvalid <= '0';
 

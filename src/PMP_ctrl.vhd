@@ -36,9 +36,14 @@ begin
 
     opc <= syllable(7 downto 0);
 
-    process(ctrl_select, opc, immediate, operand_src, operand_dst)
+    process(ctrl_select, opc, immediate, operand_src, operand_dst, offset)
 
     begin
+ 
+    PC_addr <= (others => '0');
+    PC_load <= '0';
+    PC_add <= '0';
+    PC_stop <= '0';
 
         if (ctrl_select = '0') then
 
